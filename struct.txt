@@ -1,0 +1,16 @@
+music-platform/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── Auth/
+│   │   │   ├── Login.js
+│   │   │   └── Signup.js
+│   │   ├── Music/
+│   │   │   ├── UploadMusic.js
+│   │   │   └── MusicPlayer.js
+│   │   └── Home.js
+│   ├── firebase.js
+│   └── App.js
+├── .gitignore
+├── package.json
+└── README.md

@@ -1,0 +1,56 @@
+.sidebar {
+    position:fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 190px;
+    background-color: #000000;
+    padding-top: 20px;
+    overflow-y: auto;
+    border-radius: 25px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.menu {
+    margin-bottom: 20px;
+}
+
+.menu h5, h3 {
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #444;
+}
+
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    padding: 10px 20px;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    color: #ccc;
+    text-decoration: none;
+}
+
+.menu-link:hover {
+    color: #fff;
+}
+
+.menu-link i {
+    margin-right: 10px;
+}
