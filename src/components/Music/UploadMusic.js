@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { storage } from '../../firebase';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import './UploadMusic.css';
 import Sidebar from '../sidebar';
 
-const UploadMusic = ({ firebaseApp, currentUser }) => {
+const UploadMusic = () => {
     const navigate = useNavigate();
     const [songTitle, setSongTitle] = useState('');
     const [artist, setArtist] = useState('');
     const [username, setUsername] = useState('');
     const [file, setFile] = useState(null);
     const [uploadProgress, setUploadProgress] = useState(0);
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
 
     const handleFileChange = (e) => {
         if (e.target.files[0]) {
@@ -18,16 +21,15 @@ const UploadMusic = ({ firebaseApp, currentUser }) => {
         }
     };
 
-    const handleUpload = async (e) => {
+    const handleUpload = (e) => {
         e.preventDefault();
 
         if (!file) {
-            alert('Please select a file.');
+            setError('Please select a file.');
             return;
         }
 
-        const storage = getStorage(firebaseApp);
-        const storageRef = ref(storage, 'music/' + file.name);
+        const storageRef = ref(storage, `music/${username}/${file.name}`);
         const uploadTask = uploadBytesResumable(storageRef, file);
 
         uploadTask.on('state_changed',
@@ -38,13 +40,15 @@ const UploadMusic = ({ firebaseApp, currentUser }) => {
             },
             (error) => {
                 console.error('Error uploading file:', error);
-                alert('Error uploading file:', error.message);
+                setError(error.message);
+                setSuccess(null);
             },
             () => {
                 // Upload completed successfully, now get the download URL
                 getDownloadURL(uploadTask.snapshot.ref).then((url) => {
                     console.log('File available at', url);
-                    alert('File uploaded successfully!');
+                    setSuccess('File uploaded successfully!');
+                    setError(null);
                     navigate('/musicplayer'); // Navigate to music player page after successful upload
                 });
             }
@@ -107,6 +111,8 @@ const UploadMusic = ({ firebaseApp, currentUser }) => {
                         <button type="submit">Upload</button>
                     </div>
                     {uploadProgress > 0 && <p>Upload Progress: {uploadProgress}%</p>}
+                    {error && <p className="error-message">{error}</p>}
+                    {success && <p className="success-message">{success}</p>}
                 </form>
             </div>
         </div>

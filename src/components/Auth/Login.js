@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { auth } from '../../firebase'; // Импортируем auth из нашего firebase.js
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import './Login.css';
 
-const Login = ({ firebaseApp }) => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -12,11 +13,10 @@ const Login = ({ firebaseApp }) => {
   const handleSignIn = async (event) => {
     event.preventDefault();
     try {
-      const auth = firebaseApp.auth();
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       console.log('User logged in:', user.uid);
-      navigate('/'); // Redirect to homepage after successful login
+      navigate('/'); // Перенаправление на главную страницу после успешного входа
     } catch (error) {
       setError(error.message);
     }

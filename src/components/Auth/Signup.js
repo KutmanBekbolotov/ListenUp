@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { auth } from '../../firebase'; // Импортируем auth из нашего firebase.js
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import './Signup.css';
 
-const Signup = ({ firebaseApp }) => {
+const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const handleSignup = async (event) => {
+  const handleSignUp = async (event) => {
     event.preventDefault();
     try {
-      const auth = firebaseApp.auth();
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      console.log('User registered:', user.uid);
-      navigate('/'); // Redirect to homepage after successful registration
+      console.log('User signed up:', user.uid);
+      navigate('/'); // Перенаправление на главную страницу после успешной регистрации
     } catch (error) {
       setError(error.message);
     }
@@ -26,13 +26,13 @@ const Signup = ({ firebaseApp }) => {
     <div className="signup-card-container">
       <div className="signup-card">
         <div className="signup-card-logo">
-          <img className='logoSignup' src="bulgass.png" alt="logo" />
+          <img src="bulgass.png" alt="logo" />
         </div>
         <div className="signup-card-header">
-          <h1>Create Account</h1>
-          <div>Please create an account to use the platform</div>
+          <h1>Sign Up</h1>
+          <div>Create a new account</div>
         </div>
-        <form className="signup-card-form" onSubmit={handleSignup}>
+        <form className="signup-card-form" onSubmit={handleSignUp}>
           <div className="form-item">
             <span className="form-item-icon material-symbols-rounded"></span>
             <input
@@ -55,10 +55,10 @@ const Signup = ({ firebaseApp }) => {
             />
           </div>
           {error && <p className="error-message">{error}</p>}
-          <button type="submit">Create Account</button>
+          <button type="submit">Sign Up</button>
         </form>
         <div className="signup-card-footer">
-          Already have an account? <a href="/login">Sign In.</a>
+          Already have an account? <a href="/login">Sign in</a>
         </div>
       </div>
     </div>
@@ -66,4 +66,3 @@ const Signup = ({ firebaseApp }) => {
 };
 
 export default Signup;
-
