@@ -48,6 +48,11 @@ const MusicPlayerPlatform = () => {
                 <h2>Here you can listen and add any music you want</h2>
                 <p>Explore genres, discover new artists, and find your favorite songs.</p>
                 
+                    <p>&copy; 2024 Listen Up. All rights reserved.</p>
+
+            </section>
+
+            <footer>
                 <div className="song-list">
                     {songs.map((song) => (
                         <div key={song.url} className="song-item" onClick={() => handleSongClick(song)}>
@@ -55,12 +60,7 @@ const MusicPlayerPlatform = () => {
                         </div>
                     ))}
                 </div>
-
                 {currentSong && <audio controls autoPlay src={currentSong} />}
-            </section>
-
-            <footer>
-                <p>&copy; 2024 Listen Up. All rights reserved.</p>
             </footer>
         </div>
     );

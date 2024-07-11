@@ -26,5 +26,9 @@ body {
     color: #555;
 }
 
-
+.song-item{
+    text-align: left;
+    color:aqua;
+    font-size: x-large;
+}
 

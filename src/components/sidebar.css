@@ -9,6 +9,7 @@
     padding-left: 20px;
     overflow-y: auto;
     border-radius: 25px;
+    height: 100%;
 }
 
 .logo {
@@ -56,4 +57,9 @@
 
 .menu-link i {
     margin-right: 10px;
+}
+.container-user{
+margin-top: 300px;
+margin-left: 20px;
+color:#fff;
 }

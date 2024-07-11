@@ -42,15 +42,13 @@ const Sidebar = () => {
                             </svg></i> UploadMusic
                         </Link>
                     </li>
-                    <li>
-                        <Link to="/MusicPlayer" className="menu-link">
-                            <i className='bx bxs-music'>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
-                            	<path fill="currentColor" d="M6 18.573c2.206 0 4-1.794 4-4V4.428L19 7.7v7.43a3.953 3.953 0 0 0-2-.557c-2.206 0-4 1.794-4 4s1.794 4 4 4s4-1.794 4-4V7a.998.998 0 0 0-.658-.939l-11-4A.999.999 0 0 0 8 3v8.13a3.953 3.953 0 0 0-2-.557c-2.206 0-4 1.794-4 4s1.794 4 4 4" />
-                            </svg></i> MusicPlayer
-                        </Link>
-                    </li>
                 </ul>
+            <div className='container-user'>
+                <div className='user'>
+                    <div className='user-name'>Ilyaz</div>
+                </div>
+                <div className='log-out'>Exit</div>
+            </div>
             </div>
         </aside>
     );
