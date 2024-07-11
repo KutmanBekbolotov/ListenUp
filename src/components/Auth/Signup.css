@@ -8,13 +8,13 @@ body {
     align-items: center;
 }
 
-.login-card-container {
+.signup-card-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.login-card {
+.signup-card {
     width: 450px;
     background: rgba(255, 255, 255, .5);
     padding: 4rem;
@@ -22,7 +22,7 @@ body {
     position: relative;
 }
 
-.login-card::before {
+.signup-card::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -32,40 +32,40 @@ body {
     z-index: -1;
 }
 
-.login-card-logo {
+.signup-card-logo {
     margin-bottom: 2rem;
 }
 
-.login-card-logo img {
+.signup-card-logo img {
     width: 60px;
 }
 
-.login-card-header {
+.signup-card-header {
     margin-bottom: 2rem;
 }
 
-.login-card-header h1 {
+.signup-card-header h1 {
     font-size: 2rem;
     font-weight: 600;
     margin-bottom: .5rem;
 }
 
-.login-card-header h1+div {
+.signup-card-header h1+div {
     font-size: calc(1rem * .8);
     opacity: .8;
 }
 
-.login-card-form {
+.signup-card-form {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
 
-.login-card-form .form-item {
+.signup-card-form .form-item {
     position: relative;
 }
 
-.login-card-form .form-item .form-item-icon {
+.signup-card-form .form-item .form-item-icon {
     position: absolute;
     top: .82rem;
     left: 1.4rem;
@@ -73,13 +73,13 @@ body {
     opacity: .4;
 }
 
-.login-card-form .checkbox {
+.signup-card-form .checkbox {
     display: flex;
     align-items: center;
     gap: 7px;
 }
 
-.login-card-form .form-item-other {
+.signup-card-form .form-item-other {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -87,14 +87,14 @@ body {
     margin-bottom: .5rem;
 }
 
-.login-card-footer {
+.signup-card-footer {
     margin-top: 1.5rem;
     font-size: calc(1rem * .8);
 }
 
-.login-card input[type="text"],
-.login-card input[type="password"],
-.login-card input[type="email"] {
+.signup-card input[type="text"],
+.signup-card input[type="password"],
+.signup-card input[type="email"] {
     border: none;
     outline: none;
     background: rgba(255, 255, 255, .3);
@@ -102,20 +102,20 @@ body {
     padding-left: calc(1rem * 3.5);
     border-radius: 100px;
     width: 100%;
-    transition: background .5s;
+    transition: backgroundColor .5s;
 }
 
-.login-card input:focus {
+.signup-card input:focus {
     background: white;
 }
 
-.login-card input[type="checkbox"] {
+.signup-card input[type="checkbox"] {
     width: 16px;
     height: 16px;
     accent-color: black;
 }
 
-.login-card button {
+.signup-card button {
     background: black;
     color: white;
     padding: 1rem;
@@ -126,7 +126,7 @@ body {
     transition: background .5s;
 }
 
-.login-card button:hover {
+.signup-card button:hover {
     background-color: rgba(0, 0, 0, 0.85);
     cursor: pointer;
 }
