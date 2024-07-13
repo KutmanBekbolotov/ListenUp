@@ -6,6 +6,7 @@ import Sidebar from './sidebar';
 import SongSearch from './MusicSearcher'; 
 import { storage, db } from '../firebase';
 import { useAuth } from '../context/AuthContext';
+import MediaPlayer from './MediaPlayer';
 
 const MusicPlayerPlatform = () => {
     const [songs, setSongs] = useState([]);
@@ -91,6 +92,7 @@ const MusicPlayerPlatform = () => {
         <div className="homepage">
             <Sidebar />
             <SongSearch onSearch={handleSearch} />
+            <MediaPlayer songs={filteredSongs} />
             
             <header className='header'>
                 <h2>Welcome to Listen Up music platform from <br /> Bulgass Soft Works</h2>
