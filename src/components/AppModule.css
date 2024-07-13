@@ -58,4 +58,39 @@ body {
     background: linear-gradient(180deg,#ca16a3, #8f288f);
 }
 
+/* Основные стили для текста и элементов */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Стили для мобильных устройств */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 16px; /* Уменьшите размер шрифта */
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-size: 1.25em; /* Соответствующее уменьшение для заголовков */
+    }
+
+    .container {
+        padding: 10px; /* Уменьшите внутренний отступ для контейнера */
+    }
+}
+
+/* Стили для еще меньших устройств */
+@media screen and (max-width: 480px) {
+    body {
+        font-size: 14px; /* Ещё меньше размер шрифта */
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-size: 1em; /* Ещё меньше размер для заголовков */
+    }
+
+    .container {
+        padding: 5px; /* Ещё меньше внутренний отступ для контейнера */
+    }
+}
 

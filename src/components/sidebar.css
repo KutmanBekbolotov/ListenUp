@@ -63,3 +63,51 @@ margin-top: 300px;
 margin-left: 20px;
 color:#fff;
 }
+
+/* Основные стили для Sidebar */
+.sidebar {
+    width: 250px; /* Ширина боковой панели по умолчанию */
+    transition: 0.3s;
+}
+
+/* Стили для мобильных устройств */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 200px; /* Уменьшите ширину боковой панели для мобильных устройств */
+    }
+    
+    .sidebar a {
+        font-size: 18px; /* Уменьшите размер шрифта */
+        padding: 10px 15px; /* Уменьшите внутренний отступ */
+    }
+
+    .sidebar .logo, .sidebar .menu-title {
+        font-size: 20px; /* Уменьшите размер шрифта для логотипа и заголовка меню */
+        padding: 10px; /* Уменьшите внутренний отступ */
+    }
+
+    .main-content {
+        margin-left: 200px; /* Соответствующий отступ для основного контента */
+    }
+}
+
+/* Стили для еще меньших устройств */
+@media screen and (max-width: 480px) {
+    .sidebar {
+        width: 150px; /* Ещё меньше ширина для совсем маленьких устройств */
+    }
+    
+    .sidebar a {
+        font-size: 16px; /* Ещё меньше размер шрифта */
+        padding: 8px 10px; /* Ещё меньше внутренний отступ */
+    }
+
+    .sidebar .logo, .sidebar .menu-title {
+        font-size: 18px; /* Ещё меньше размер шрифта для логотипа и заголовка меню */
+        padding: 8px; /* Ещё меньше внутренний отступ */
+    }
+
+    .main-content {
+        margin-left: 150px; /* Соответствующий отступ для основного контента */
+    }
+}
