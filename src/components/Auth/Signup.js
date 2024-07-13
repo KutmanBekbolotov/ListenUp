@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../firebase'; // Импортируем auth из нашего firebase.js
+import { auth } from '../../firebase'; 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import './Signup.css';
 
@@ -16,7 +16,7 @@ const Signup = () => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       console.log('User signed up:', user.uid);
-      navigate('/'); // Перенаправление на главную страницу после успешной регистрации
+      navigate('/'); 
     } catch (error) {
       setError(error.message);
     }

@@ -72,9 +72,10 @@ const Sidebar = () => {
                         <div className='user'>
                             <div className='user-name'>{currentUser.displayName ? currentUser.displayName.charAt(0).toUpperCase() : ''}</div>
                         </div>
-                        <div className='log-out' onClick={handleLogout}>Log out</div>
+                        <div className='log-out' onClick={handleLogout}>Log</div>
                     </div>
                 ) : null}
+                
             </div>
         </aside>
     );

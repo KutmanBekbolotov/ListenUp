@@ -69,7 +69,6 @@ const MusicPlayerPlatform = () => {
                 songs: arrayUnion(song)
             });
     
-            // Обновляем список песен после добавления в плейлист
             setSongs([...songs, song]);
     
             console.log("Song added to playlist!");
@@ -90,13 +89,16 @@ const MusicPlayerPlatform = () => {
             </header>
 
             <section>
-                <div className="song-list">
+                <div className='container-music'>
+                    <div className="song-list">
                 {songs.map((song, index) => (
     <div key={index} className="song-item">
         <div onClick={() => handleSongClick(song)}>{song.name}</div>
-        <button onClick={() => addToPlaylist(song)}>Добавить в плейлист</button>
+        <button className='btn-add' onClick={() => addToPlaylist(song)}>.</button>
     </div>
 ))}
+                </div>
+                
                 </div>
                 {currentSong && <audio controls autoPlay src={currentSong} />}
             </section>
