@@ -5,6 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 import Sidebar from '../sidebar';
 import './PlayList.css';
 import SongSearch from '../MusicSearcher';
+import MediaPlayer from '../MediaPlayer';
 
 const PlayList = () => {
     const { currentUser } = useAuth();
@@ -21,7 +22,7 @@ const PlayList = () => {
                     if (playlistDoc.exists()) {
                         const playlistData = playlistDoc.data().songs || [];
                         setPlaylist(playlistData);
-                        setFilteredPlaylist(playlistData); // Начальная установка фильтрованного плейлиста
+                        setFilteredPlaylist(playlistData); // Устанавливаем фильтрованный плейлист изначально равным всем песням
                     } else {
                         console.log('Плейлист пользователя не найден.');
                     }
@@ -36,31 +37,32 @@ const PlayList = () => {
 
     const handleSearch = (searchTerm) => {
         if (searchTerm.trim() === '') {
-            setFilteredPlaylist(playlist); // Показываем полный плейлист, если запрос пустой
+            setFilteredPlaylist(playlist); // Если строка поиска пуста, показываем весь плейлист
         } else {
             const filtered = playlist.filter(song =>
                 song.name.toLowerCase().includes(searchTerm.toLowerCase())
             );
-            setFilteredPlaylist(filtered); // Фильтруем плейлист по запросу
+            setFilteredPlaylist(filtered); // Иначе фильтруем плейлист по поисковому запросу
         }
     };
 
     return (
         <div className="playlist-page">
             <Sidebar />
-            <SongSearch onSearch={handleSearch} /> 
+            <SongSearch onSearch={handleSearch} />
+            <MediaPlayer songs={filteredPlaylist} /> {/* Передаем отфильтрованный плейлист в MediaPlayer */}
             <h2>Your Playlist</h2>
             <div className='container-music'>
-            <ul>
-                {filteredPlaylist.map((song, index) => (
-                    <li key={index}>
-                        <div className="playlist-song">
-                            <p>{song.name.replace(".mp3", "")}</p>
-                            <audio controls src={song.url} />
-                        </div>
-                    </li>
-                ))}
-            </ul>
+                <ul>
+                    {filteredPlaylist.map((song, index) => (
+                        <li key={index}>
+                            <div className="playlist-song">
+                                <p>{song.name.replace(".mp3", "")}</p>
+                                <audio controls src={song.url} />
+                            </div>
+                        </li>
+                    ))}
+                </ul>
             </div>
         </div>
     );
