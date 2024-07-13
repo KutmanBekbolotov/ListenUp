@@ -3,6 +3,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useAuth } from '../../context/AuthContext';
 import Sidebar from '../sidebar';
+import './PlayList.css'
 
 const PlayList = () => {
     const { currentUser } = useAuth();
