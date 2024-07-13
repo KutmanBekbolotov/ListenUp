@@ -50,6 +50,7 @@ const PlayList = () => {
             <Sidebar />
             <SongSearch onSearch={handleSearch} /> 
             <h2>Your Playlist</h2>
+            <div className='container-music'>
             <ul>
                 {filteredPlaylist.map((song, index) => (
                     <li key={index}>
@@ -60,6 +61,7 @@ const PlayList = () => {
                     </li>
                 ))}
             </ul>
+            </div>
         </div>
     );
 };
