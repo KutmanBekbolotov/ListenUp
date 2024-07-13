@@ -3,11 +3,13 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { useAuth } from '../../context/AuthContext';
 import Sidebar from '../sidebar';
-import './PlayList.css'
+import './PlayList.css';
+import SongSearch from '../MusicSearcher';
 
 const PlayList = () => {
     const { currentUser } = useAuth();
     const [playlist, setPlaylist] = useState([]);
+    const [filteredPlaylist, setFilteredPlaylist] = useState([]);
 
     useEffect(() => {
         const fetchPlaylist = async () => {
@@ -19,6 +21,7 @@ const PlayList = () => {
                     if (playlistDoc.exists()) {
                         const playlistData = playlistDoc.data().songs || [];
                         setPlaylist(playlistData);
+                        setFilteredPlaylist(playlistData); // Начальная установка фильтрованного плейлиста
                     } else {
                         console.log('Плейлист пользователя не найден.');
                     }
@@ -31,12 +34,24 @@ const PlayList = () => {
         fetchPlaylist();
     }, [currentUser]);
 
+    const handleSearch = (searchTerm) => {
+        if (searchTerm.trim() === '') {
+            setFilteredPlaylist(playlist); // Показываем полный плейлист, если запрос пустой
+        } else {
+            const filtered = playlist.filter(song =>
+                song.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            setFilteredPlaylist(filtered); // Фильтруем плейлист по запросу
+        }
+    };
+
     return (
         <div className="playlist-page">
             <Sidebar />
+            <SongSearch onSearch={handleSearch} /> 
             <h2>Your Playlist</h2>
             <ul>
-                {playlist.map((song, index) => (
+                {filteredPlaylist.map((song, index) => (
                     <li key={index}>
                         <div className="playlist-song">
                             <p>{song.name.replace(".mp3", "")}</p>

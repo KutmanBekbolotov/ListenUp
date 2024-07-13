@@ -3,12 +3,14 @@ import { ref as storageRef, listAll, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc, getDoc, updateDoc, arrayUnion, Timestamp } from 'firebase/firestore';
 import './AppModule.css';
 import Sidebar from './sidebar';
+import SongSearch from './MusicSearcher'; 
 import { storage, db } from '../firebase';
 import { useAuth } from '../context/AuthContext';
 
 const MusicPlayerPlatform = () => {
     const [songs, setSongs] = useState([]);
     const [currentSong, setCurrentSong] = useState(null);
+    const [filteredSongs, setFilteredSongs] = useState([]);
     const { currentUser } = useAuth();
 
     useEffect(() => {
@@ -35,6 +37,7 @@ const MusicPlayerPlatform = () => {
                 const flattenedSongs = allSongs.flat();
 
                 setSongs(flattenedSongs);
+                setFilteredSongs(flattenedSongs);
             } catch (error) {
                 console.error('Error fetching songs:', error);
             }
@@ -74,14 +77,20 @@ const MusicPlayerPlatform = () => {
             console.log("Song added to playlist!");
         } catch (error) {
             console.error("Error adding song to playlist: ", error);
-            console.log("Error adding song to playlist.");
         }
     };
-    
+
+    const handleSearch = (term) => {
+        const filtered = songs.filter(song =>
+            song.name.toLowerCase().includes(term.toLowerCase())
+        );
+        setFilteredSongs(filtered);
+    };
 
     return (
         <div className="homepage">
             <Sidebar />
+            <SongSearch onSearch={handleSearch} />
             
             <header className='header'>
                 <h2>Welcome to Listen Up music platform from <br /> Bulgass Soft Works</h2>
@@ -91,14 +100,17 @@ const MusicPlayerPlatform = () => {
             <section>
                 <div className='container-music'>
                     <div className="song-list">
-                {songs.map((song, index) => (
-    <div key={index} className="song-item">
-        <div className='songPlay' onClick={() => handleSongClick(song)}>{song.name.replace(".mp3", "")}</div>
-        <button className='btn-add' onClick={() => addToPlaylist(song)}><img alt='add-music' className='addMusicImg' src='music-add.png'></img></button>
-    </div>
-))}
-                </div>
-                
+                        {filteredSongs.map((song, index) => (
+                            <div key={index} className="song-item">
+                                <div className='songPlay' onClick={() => handleSongClick(song)}>
+                                    {song.name.replace(".mp3", "")}
+                                </div>
+                                <button className='btn-add' onClick={() => addToPlaylist(song)}>
+                                    <img alt='add-music' className='addMusicImg' src='music-add.png' />
+                                </button>
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 {currentSong && <audio controls autoPlay src={currentSong} />}
             </section>
