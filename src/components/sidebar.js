@@ -8,7 +8,7 @@ const Sidebar = () => {
             <div className="menu">
                 <div className='name'>
                     <h3>Listen Up</h3>
-                    <img className='logo' src="bulgass.png" alt="logo" />
+                    <img className='logo' src="logo.gif" alt="logo" />
                 </div>
                 <h5>Menu</h5>
                 <ul>
@@ -42,6 +42,17 @@ const Sidebar = () => {
                             </svg></i> UploadMusic
                         </Link>
                     </li>
+                    <li>
+    <Link to="/PlayList" className="menu-link">
+        <i className='bx bxs-music-playlist'>
+            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M5 5h14v2H5V5zm0 6h14v2H5v-2zm0 6h14v2H5v-2zm6-9.5h5v1h-5v-1zm0 3h5v1h-5v-1zm0 3h5v1h-5v-1zm0 3h5v1h-5v-1z" />
+            </svg>
+        </i> 
+        PlayList
+    </Link>
+</li>
+
                 </ul>
             <div className='container-user'>
                 <div className='user'>

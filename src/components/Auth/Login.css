@@ -39,6 +39,7 @@ body {
   
   .login-card-logo img {
     width: 60px;
+    border-radius: 15px;
   }
   
   .login-card-header {

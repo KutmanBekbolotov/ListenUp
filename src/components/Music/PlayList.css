@@ -1,0 +1,37 @@
+.playlist-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header h2 {
+    margin: 20px 0;
+    
+}
+
+.content {
+    width: 80%;
+}
+
+.song-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.song-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.song-item span {
+    flex-grow: 1;
+}
+
+footer {
+    margin-top: 20px;
+}

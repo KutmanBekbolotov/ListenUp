@@ -17,5 +17,5 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_LISTENUP_B1BD1 }}
-          projectId: listenup-b1bd1
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_LISTENUP2_E5778 }}
+          projectId: listenup2-e5778

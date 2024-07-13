@@ -44,12 +44,11 @@ const UploadMusic = () => {
                 setSuccess(null);
             },
             () => {
-                // Upload completed successfully, now get the download URL
                 getDownloadURL(uploadTask.snapshot.ref).then((url) => {
                     console.log('File available at', url);
                     setSuccess('File uploaded successfully!');
                     setError(null);
-                    navigate('/musicplayer'); // Navigate to music player page after successful upload
+                    navigate('/musicplayer'); 
                 });
             }
         );

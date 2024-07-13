@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../firebase'; // Импортируем auth из нашего firebase.js
+import { auth } from '../../firebase'; 
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import './Login.css';
 
@@ -16,7 +16,7 @@ const Login = () => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       console.log('User logged in:', user.uid);
-      navigate('/'); // Перенаправление на главную страницу после успешного входа
+      navigate('/'); 
     } catch (error) {
       setError(error.message);
     }
@@ -26,7 +26,7 @@ const Login = () => {
     <div className="login-card-container">
       <div className="login-card">
         <div className="login-card-logo">
-          <img src="bulgass.png" alt="logo" />
+          <img src="logo.gif" alt="logo" />
         </div>
         <div className="login-card-header">
           <h1>Sign In</h1>

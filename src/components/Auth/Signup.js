@@ -26,7 +26,7 @@ const Signup = () => {
     <div className="signup-card-container">
       <div className="signup-card">
         <div className="signup-card-logo">
-          <img src="bulgass.png" alt="logo" />
+          <img src="logo.gif" alt="logo" />
         </div>
         <div className="signup-card-header">
           <h1>Sign Up</h1>
