@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { ref as storageRef, listAll, getDownloadURL } from 'firebase/storage';
+import { doc, setDoc, getDoc, updateDoc, arrayUnion, Timestamp } from 'firebase/firestore';
 import './AppModule.css';
 import Sidebar from './sidebar';
-import { storage } from '../firebase'; 
+import { storage, db } from '../firebase';
+import { useAuth } from '../context/AuthContext';
 
 const MusicPlayerPlatform = () => {
     const [songs, setSongs] = useState([]);
     const [currentSong, setCurrentSong] = useState(null);
+    const { currentUser } = useAuth();
 
     useEffect(() => {
         const fetchSongs = async () => {
@@ -44,33 +47,64 @@ const MusicPlayerPlatform = () => {
         setCurrentSong(song.url);
     };
 
+    const addToPlaylist = async (song) => {
+        if (!currentUser) {
+            alert("Please log in to add songs to your playlist.");
+            return;
+        }
+    
+        try {
+            const playlistRef = doc(db, 'playlists', currentUser.uid);
+            const playlistSnap = await getDoc(playlistRef);
+    
+            if (!playlistSnap.exists()) {
+                await setDoc(playlistRef, {
+                    userId: currentUser.uid,
+                    songs: [],
+                    createdAt: Timestamp.now()
+                });
+            }
+    
+            await updateDoc(playlistRef, {
+                songs: arrayUnion(song)
+            });
+    
+            // Обновляем список песен после добавления в плейлист
+            setSongs([...songs, song]);
+    
+            console.log("Song added to playlist!");
+        } catch (error) {
+            console.error("Error adding song to playlist: ", error);
+            console.log("Error adding song to playlist.");
+        }
+    };
+    
+
     return (
         <div className="homepage">
             <Sidebar />
             
             <header>
-                <h2>Welcome to Listen Up music platform from <br></br> Bulgass Soft Works</h2>
-                      <h2>Here you can listen and add any music you want</h2>
+                <h2>Welcome to Listen Up music platform from <br /> Bulgass Soft Works</h2>
+                <h2>Here you can listen and add any music you want</h2>
             </header>
 
             <section>
                 <div className="song-list">
-                    {songs.map((song) => (
-                        <div key={song.url} className="song-item" onClick={() => handleSongClick(song)}>
-                            {song.name}
-                        </div>
-                    ))}
+                {songs.map((song, index) => (
+    <div key={index} className="song-item">
+        <div onClick={() => handleSongClick(song)}>{song.name}</div>
+        <button onClick={() => addToPlaylist(song)}>Добавить в плейлист</button>
+    </div>
+))}
                 </div>
                 {currentSong && <audio controls autoPlay src={currentSong} />}
             </section>
 
             <footer className="content">
                 <p>Explore genres, discover new artists, and find your favorite songs.</p>
-                
-                    <p>&copy; 2024 Listen Up. All rights reserved.</p>
-
+                <p>&copy; 2024 Listen Up. All rights reserved.</p>
             </footer>
-
         </div>
     );
 }

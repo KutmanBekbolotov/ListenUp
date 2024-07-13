@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase'; 
-import { useAuth } from '../../context/AuthContext'; 
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase';
+import { useAuth } from '../../context/AuthContext';
 import Sidebar from '../sidebar';
 
 const PlayList = () => {
@@ -11,10 +11,17 @@ const PlayList = () => {
     useEffect(() => {
         const fetchPlaylist = async () => {
             try {
-                const userPlaylistRef = collection(db, 'playlists', currentUser.uid, 'songs');
-                const playlistSnapshot = await getDocs(userPlaylistRef);
-                const playlistData = playlistSnapshot.docs.map(doc => doc.data());
-                setPlaylist(playlistData);
+                if (currentUser) {
+                    const playlistRef = doc(db, 'playlists', currentUser.uid);
+                    const playlistDoc = await getDoc(playlistRef);
+
+                    if (playlistDoc.exists()) {
+                        const playlistData = playlistDoc.data().songs || [];
+                        setPlaylist(playlistData);
+                    } else {
+                        console.log('Плейлист пользователя не найден.');
+                    }
+                }
             } catch (error) {
                 console.error('Error fetching playlist:', error);
             }
@@ -25,7 +32,7 @@ const PlayList = () => {
 
     return (
         <div className="playlist-page">
-            <Sidebar/>
+            <Sidebar />
             <h2>Your Playlist</h2>
             <ul>
                 {playlist.map((song, index) => (

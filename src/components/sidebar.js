@@ -1,8 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import './sidebar.css';
 
 const Sidebar = () => {
+    const { currentUser, logout } = useAuth();
+
+    const handleLogout = async () => {
+        try {
+            await logout();
+            // Дополнительные действия после выхода из аккаунта, например, перенаправление на страницу входа
+        } catch (error) {
+            console.error('Ошибка при выходе из аккаунта:', error);
+            // Дополнительная обработка ошибки
+        }
+    };
+
     return (
         <aside className="sidebar">
             <div className="menu">
@@ -43,23 +56,25 @@ const Sidebar = () => {
                         </Link>
                     </li>
                     <li>
-    <Link to="/PlayList" className="menu-link">
-        <i className='bx bxs-music-playlist'>
-            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M5 5h14v2H5V5zm0 6h14v2H5v-2zm0 6h14v2H5v-2zm6-9.5h5v1h-5v-1zm0 3h5v1h-5v-1zm0 3h5v1h-5v-1zm0 3h5v1h-5v-1z" />
-            </svg>
-        </i> 
-        PlayList
-    </Link>
-</li>
-
+                        <Link to="/PlayList" className="menu-link">
+                            <i className='bx bxs-music-playlist'>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M5 5h14v2H5V5zm0 6h14v2H5v-2zm0 6h14v2H5v-2zm6-9.5h5v1h-5v-1zm0 3h5v1h-5v-1zm0 3h5v1h-5v-1zm0 3h5v1h-5v-1z" />
+                                </svg>
+                            </i> 
+                            PlayList
+                        </Link>
+                    </li>
                 </ul>
-            <div className='container-user'>
-                <div className='user'>
-                    <div className='user-name'>Ilyaz</div>
-                </div>
-                <div className='log-out'>Exit</div>
-            </div>
+
+                {currentUser ? (
+                    <div className='container-user'>
+                        <div className='user'>
+                            <div className='user-name'>{currentUser.displayName ? currentUser.displayName.charAt(0).toUpperCase() : ''}</div>
+                        </div>
+                        <div className='log-out' onClick={handleLogout}>Log out</div>
+                    </div>
+                ) : null}
             </div>
         </aside>
     );
