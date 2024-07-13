@@ -107,7 +107,7 @@ const UploadMusic = () => {
                         />
                     </div>
                     <div className="form-group">
-                        <button type="submit">Upload</button>
+                        <button className='btnUpload' type="submit">Upload</button>
                     </div>
                     {uploadProgress > 0 && <p>Upload Progress: {uploadProgress}%</p>}
                     {error && <p className="error-message">{error}</p>}

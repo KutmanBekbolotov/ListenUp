@@ -38,7 +38,7 @@ const PlayList = () => {
                 {playlist.map((song, index) => (
                     <li key={index}>
                         <div className="playlist-song">
-                            <p>{song.name}</p>
+                            <p>{song.name.replace(".mp3", "")}</p>
                             <audio controls src={song.url} />
                         </div>
                     </li>

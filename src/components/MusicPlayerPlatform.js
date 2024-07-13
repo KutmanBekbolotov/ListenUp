@@ -83,7 +83,7 @@ const MusicPlayerPlatform = () => {
         <div className="homepage">
             <Sidebar />
             
-            <header>
+            <header className='header'>
                 <h2>Welcome to Listen Up music platform from <br /> Bulgass Soft Works</h2>
                 <h2>Here you can listen and add any music you want</h2>
             </header>
@@ -93,8 +93,8 @@ const MusicPlayerPlatform = () => {
                     <div className="song-list">
                 {songs.map((song, index) => (
     <div key={index} className="song-item">
-        <div onClick={() => handleSongClick(song)}>{song.name}</div>
-        <button className='btn-add' onClick={() => addToPlaylist(song)}>.</button>
+        <div className='songPlay' onClick={() => handleSongClick(song)}>{song.name.replace(".mp3", "")}</div>
+        <button className='btn-add' onClick={() => addToPlaylist(song)}><img alt='add-music' className='addMusicImg' src='music-add.png'></img></button>
     </div>
 ))}
                 </div>
