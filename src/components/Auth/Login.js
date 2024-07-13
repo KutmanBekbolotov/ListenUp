@@ -60,7 +60,6 @@ const Login = () => {
               <input type="checkbox" id="rememberMeCheckbox" defaultChecked />
               <label htmlFor="rememberMeCheckbox">Remember me</label>
             </div>
-            <a href="#">I forgot my password!</a>
           </div>
           <button type="submit">Sign In</button>
         </form>
