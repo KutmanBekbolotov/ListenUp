@@ -35,6 +35,7 @@ const PlayList = () => {
         <div className="playlist-page">
             <Sidebar />
             <h2>Your Playlist</h2>
+            <div className='container-music'>
             <ul>
                 {playlist.map((song, index) => (
                     <li key={index}>
@@ -45,6 +46,7 @@ const PlayList = () => {
                     </li>
                 ))}
             </ul>
+            </div>
         </div>
     );
 };

@@ -1,17 +1,4 @@
-.playlist-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-header h2 {
-    margin: 20px 0;
-    
-}
-
-.content {
-    width: 80%;
-}
 
 .song-list {
     display: flex;
@@ -32,6 +19,21 @@ header h2 {
     flex-grow: 1;
 }
 
-footer {
-    margin-top: 20px;
+.container-music-list{
+    overflow-y: scroll;
+    padding: 20px;
+}
+.container-music-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+.container-music-list::-webkit-scrollbar-track {
+    -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+    background-color: #f9f9fd;
+    border-radius: 10px;
+}
+  
+.container-music-list::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(180deg,#ca16a3, #8f288f);
 }
