@@ -105,6 +105,7 @@ body {
     border-radius: 100px;
     width: 100%;
     transition: background .5s;
+    color: #000000;
   }
   
   .login-card input:focus {

@@ -94,32 +94,26 @@ const MediaPlayer = ({ songs, currentSong, setCurrentSong }) => {
             <div className='container-media'>
             <button className="back-button media-button" onClick={playPreviousTrack}>
                 <FontAwesomeIcon icon={faStepBackward} className="button-icons" />
-                <span className="button-text milli">Back</span>
             </button>
 
             <button className="rewind-button media-button" onClick={playPreviousTrack}>
                 <FontAwesomeIcon icon={faBackward} className="button-icons" />
-                <span className="button-text milli">Rewind</span>
             </button>
 
             <button className="play-button media-button" onClick={playPauseToggle}>
                 <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} className="button-icons delta" />
-                <span className="button-text milli">{isPlaying ? 'Pause' : 'Play'}</span>
             </button>
 
             <button className="fast-forward-button media-button" onClick={playNextTrack}>
                 <FontAwesomeIcon icon={faForward} className="button-icons" />
-                <span className="button-text milli">Forward</span>
             </button>
 
             <button className="skip-button media-button" onClick={playNextTrack}>
                 <FontAwesomeIcon icon={faStepForward} className="button-icons" />
-                <span className="button-text milli">Skip</span>
             </button>
 
             <button className="random-button media-button" onClick={toggleRandom}>
                 <FontAwesomeIcon icon={faRandom} className={`button-icons ${isRandom ? 'active' : ''}`} />
-                <span className="button-text milli">Random</span>
             </button>
             </div>
 
