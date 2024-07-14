@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStepBackward, faBackward, faPlay, faPause, faForward, faStepForward, faRandom } from '@fortawesome/free-solid-svg-icons';
 import './MediaPlayer.css';
@@ -9,6 +9,30 @@ const MediaPlayer = ({ songs, currentSong, setCurrentSong }) => {
     const [currentSongName, setCurrentSongName] = useState('');
     const [progress, setProgress] = useState(0);
     const audioRef = useRef(new Audio()); // Initialize audioRef with a new Audio instance
+
+    const handleTimeUpdate = useCallback(() => {
+        const currentTime = audioRef.current.currentTime;
+        const duration = audioRef.current.duration;
+        setProgress((currentTime / duration) * 100);
+    }, []);
+
+    const playNextTrack = useCallback(() => {
+        if (!songs || songs.length === 0) return;
+
+        if (isRandom) {
+            let randomIndex = Math.floor(Math.random() * songs.length);
+            setCurrentSong(songs[randomIndex]);
+        } else {
+            const currentIndex = songs.findIndex(song => song === currentSong);
+            const nextIndex = (currentIndex + 1) % songs.length;
+            setCurrentSong(songs[nextIndex]);
+        }
+        setIsPlaying(true);
+    }, [songs, currentSong, isRandom, setCurrentSong]);
+
+    const handleSongEnded = useCallback(() => {
+        playNextTrack();
+    }, [playNextTrack]);
 
     useEffect(() => {
         if (!currentSong) return;
@@ -28,12 +52,13 @@ const MediaPlayer = ({ songs, currentSong, setCurrentSong }) => {
         audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
         audioRef.current.addEventListener('ended', handleSongEnded);
 
+        const audioElement = audioRef.current;
         return () => {
-            audioRef.current.pause();
-            audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
-            audioRef.current.removeEventListener('ended', handleSongEnded);
+            audioElement.pause();
+            audioElement.removeEventListener('timeupdate', handleTimeUpdate);
+            audioElement.removeEventListener('ended', handleSongEnded);
         };
-    }, [currentSong]);
+    }, [currentSong, handleTimeUpdate, handleSongEnded]);
 
     useEffect(() => {
         if (isPlaying) {
@@ -43,32 +68,8 @@ const MediaPlayer = ({ songs, currentSong, setCurrentSong }) => {
         }
     }, [isPlaying]);
 
-    const handleTimeUpdate = () => {
-        const currentTime = audioRef.current.currentTime;
-        const duration = audioRef.current.duration;
-        setProgress((currentTime / duration) * 100);
-    };
-
-    const handleSongEnded = () => {
-        playNextTrack();
-    };
-
     const playPauseToggle = () => {
         setIsPlaying(!isPlaying);
-    };
-
-    const playNextTrack = () => {
-        if (!songs || songs.length === 0) return;
-
-        if (isRandom) {
-            let randomIndex = Math.floor(Math.random() * songs.length);
-            setCurrentSong(songs[randomIndex]);
-        } else {
-            const currentIndex = songs.findIndex(song => song === currentSong);
-            const nextIndex = (currentIndex + 1) % songs.length;
-            setCurrentSong(songs[nextIndex]);
-        }
-        setIsPlaying(true);
     };
 
     const playPreviousTrack = () => {
