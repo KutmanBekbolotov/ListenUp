@@ -91,6 +91,7 @@ const MediaPlayer = ({ songs, currentSong, setCurrentSong }) => {
 
     return (
         <div className="media-controls">
+            <div className='container-media'>
             <button className="back-button media-button" onClick={playPreviousTrack}>
                 <FontAwesomeIcon icon={faStepBackward} className="button-icons" />
                 <span className="button-text milli">Back</span>
@@ -120,6 +121,7 @@ const MediaPlayer = ({ songs, currentSong, setCurrentSong }) => {
                 <FontAwesomeIcon icon={faRandom} className={`button-icons ${isRandom ? 'active' : ''}`} />
                 <span className="button-text milli">Random</span>
             </button>
+            </div>
 
             <div className="media-progress">
                 <div className="progress-bar-wrapper progress">
