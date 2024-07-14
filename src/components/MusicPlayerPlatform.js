@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ref as storageRef, listAll, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc, getDoc, updateDoc, arrayUnion, Timestamp } from 'firebase/firestore';
 import './AppModule.css';
@@ -6,46 +6,39 @@ import Sidebar from './sidebar';
 import SongSearch from './MusicSearcher';
 import { storage, db } from '../firebase';
 import { useAuth } from '../context/AuthContext';
-import MediaPlayer from './MediaPlayer'; // Обновленный импорт
+import { useQuery } from 'react-query';
+import MediaPlayer from './MediaPlayer';
+
+const fetchSongs = async () => {
+    const musicRef = storageRef(storage, 'music/');
+    const userFolders = await listAll(musicRef);
+
+    const songPromises = userFolders.prefixes.map(async (userFolderRef) => {
+        const userSongs = await listAll(userFolderRef);
+
+        return Promise.all(
+            userSongs.items.map(async (itemRef) => {
+                const url = await getDownloadURL(itemRef);
+                return {
+                    name: itemRef.name,
+                    url,
+                };
+            })
+        );
+    });
+
+    const allSongs = await Promise.all(songPromises);
+    return allSongs.flat();
+};
 
 const MusicPlayerPlatform = () => {
-    const [songs, setSongs] = useState([]);
     const [currentSong, setCurrentSong] = useState(null); // Состояние текущей песни
     const [filteredSongs, setFilteredSongs] = useState([]);
     const { currentUser } = useAuth();
 
-    useEffect(() => {
-        const fetchSongs = async () => {
-            try {
-                const musicRef = storageRef(storage, 'music/');
-                const userFolders = await listAll(musicRef);
-
-                const songPromises = userFolders.prefixes.map(async (userFolderRef) => {
-                    const userSongs = await listAll(userFolderRef);
-
-                    return Promise.all(
-                        userSongs.items.map(async (itemRef) => {
-                            const url = await getDownloadURL(itemRef);
-                            return {
-                                name: itemRef.name,
-                                url,
-                            };
-                        })
-                    );
-                });
-
-                const allSongs = await Promise.all(songPromises);
-                const flattenedSongs = allSongs.flat();
-
-                setSongs(flattenedSongs);
-                setFilteredSongs(flattenedSongs);
-            } catch (error) {
-                console.error('Error fetching songs:', error);
-            }
-        };
-
-        fetchSongs();
-    }, []);
+    const { data: songs = [], isLoading, error } = useQuery('songs', fetchSongs, {
+        onSuccess: (data) => setFilteredSongs(data),
+    });
 
     const handleSongClick = (song) => {
         console.log('Clicked song:', song);
@@ -74,8 +67,6 @@ const MusicPlayerPlatform = () => {
                 songs: arrayUnion(song)
             });
 
-            setSongs([...songs, song]);
-
             console.log("Song added to playlist!");
         } catch (error) {
             console.error("Error adding song to playlist: ", error);
@@ -88,6 +79,14 @@ const MusicPlayerPlatform = () => {
         );
         setFilteredSongs(filtered);
     };
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error loading songs: {error.message}</div>;
+    }
 
     return (
         <div className="homepage">
@@ -123,6 +122,6 @@ const MusicPlayerPlatform = () => {
             </footer>
         </div>
     );
-}
+};
 
 export default MusicPlayerPlatform;
