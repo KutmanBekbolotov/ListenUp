@@ -8,38 +8,30 @@ const MediaPlayer = ({ songs, currentSong, setCurrentSong }) => {
     const [isRandom, setIsRandom] = useState(false);
     const [currentSongName, setCurrentSongName] = useState('');
     const [progress, setProgress] = useState(0);
-    const audioRef = useRef(null);
+    const audioRef = useRef(new Audio()); // Initialize audioRef with a new Audio instance
 
     useEffect(() => {
         if (!currentSong) return;
 
-        audioRef.current = new Audio(currentSong.url);
+        audioRef.current.src = currentSong.url;
         setCurrentSongName(currentSong.name ? currentSong.name.replace('.mp3', '') : '');
 
         const playPromise = audioRef.current.play();
-
         if (playPromise !== undefined) {
             playPromise.then(_ => {
                 // Autoplay started
-            })
-            .catch(error => {
+            }).catch(error => {
                 console.error('Playback error:', error);
             });
         }
 
-        audioRef.current.addEventListener('timeupdate', () => {
-            const currentTime = audioRef.current.currentTime;
-            const duration = audioRef.current.duration;
-            setProgress((currentTime / duration) * 100);
-        });
-
-        audioRef.current.addEventListener('ended', () => {
-            playNextTrack();
-        });
+        audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
+        audioRef.current.addEventListener('ended', handleSongEnded);
 
         return () => {
             audioRef.current.pause();
-            audioRef.current = null;
+            audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
+            audioRef.current.removeEventListener('ended', handleSongEnded);
         };
     }, [currentSong]);
 
@@ -50,6 +42,16 @@ const MediaPlayer = ({ songs, currentSong, setCurrentSong }) => {
             audioRef.current.pause();
         }
     }, [isPlaying]);
+
+    const handleTimeUpdate = () => {
+        const currentTime = audioRef.current.currentTime;
+        const duration = audioRef.current.duration;
+        setProgress((currentTime / duration) * 100);
+    };
+
+    const handleSongEnded = () => {
+        playNextTrack();
+    };
 
     const playPauseToggle = () => {
         setIsPlaying(!isPlaying);
