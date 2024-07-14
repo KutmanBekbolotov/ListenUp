@@ -11,6 +11,7 @@ const PlayList = () => {
     const { currentUser } = useAuth();
     const [playlist, setPlaylist] = useState([]);
     const [filteredPlaylist, setFilteredPlaylist] = useState([]);
+    const [currentSong, setCurrentSong] = useState(null); // Добавляем состояние для текущей песни
 
     useEffect(() => {
         const fetchPlaylist = async () => {
@@ -46,19 +47,26 @@ const PlayList = () => {
         }
     };
 
+    const handleSongClick = (song) => {
+        setCurrentSong(song); // Устанавливаем текущую песню при клике на песню в плейлисте
+    };
+
     return (
         <div className="playlist-page">
             <Sidebar />
             <SongSearch onSearch={handleSearch} />
-            <MediaPlayer songs={filteredPlaylist} /> {/* Передаем отфильтрованный плейлист в MediaPlayer */}
+            <MediaPlayer
+                songs={filteredPlaylist}
+                currentSong={currentSong}
+                setCurrentSong={setCurrentSong} // Передаем setCurrentSong в MediaPlayer
+            />
             <h2>Your Playlist</h2>
             <div className='container-music'>
-                <ul>
+                <ul className='song-list'>
                     {filteredPlaylist.map((song, index) => (
-                        <li key={index}>
-                            <div className="playlist-song">
+                        <li key={index} className='song-item'>
+                            <div className="playlist-song" onClick={() => handleSongClick(song)}>
                                 <p>{song.name.replace(".mp3", "")}</p>
-                                <audio controls src={song.url} />
                             </div>
                         </li>
                     ))}
