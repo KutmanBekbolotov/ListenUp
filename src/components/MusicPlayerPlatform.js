@@ -8,6 +8,8 @@ import { storage, db } from '../firebase';
 import { useAuth } from '../context/AuthContext';
 import { useQuery } from 'react-query';
 import MediaPlayer from './MediaPlayer';
+import { useMediaPlayer } from '../context/MediaPlayerContext'; // Import useMediaPlayer
+
 
 const fetchSongs = async () => {
     const musicRef = storageRef(storage, 'music/');
@@ -32,7 +34,7 @@ const fetchSongs = async () => {
 };
 
 const MusicPlayerPlatform = () => {
-    const [currentSong, setCurrentSong] = useState(null); // Состояние текущей песни
+    const { currentSong, setCurrentSong } = useMediaPlayer(); // Use context for currentSong
     const [filteredSongs, setFilteredSongs] = useState([]);
     const { currentUser } = useAuth();
 
@@ -42,7 +44,7 @@ const MusicPlayerPlatform = () => {
 
     const handleSongClick = (song) => {
         console.log('Clicked song:', song);
-        setCurrentSong(song); // Устанавливаем текущую песню при клике
+        setCurrentSong(song); // Use context to set current song
     };
 
     const addToPlaylist = async (song) => {

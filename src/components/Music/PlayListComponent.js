@@ -7,6 +7,7 @@ import Sidebar from '../sidebar';
 import './PlayList.css';
 import SongSearch from '../MusicSearcher';
 import MediaPlayer from '../MediaPlayer';
+import { useMediaPlayer } from '../../context/MediaPlayerContext'; // Import useMediaPlayer
 
 const fetchPlaylist = async (uid) => {
     const playlistRef = doc(db, 'playlists', uid);
@@ -21,8 +22,8 @@ const fetchPlaylist = async (uid) => {
 
 const PlayList = () => {
     const { currentUser } = useAuth();
+    const { currentSong, setCurrentSong } = useMediaPlayer(); 
     const [filteredPlaylist, setFilteredPlaylist] = useState([]);
-    const [currentSong, setCurrentSong] = useState(null);
 
     const { data: playlist = [], isLoading, error } = useQuery(
         ['playlist', currentUser?.uid],
@@ -45,7 +46,7 @@ const PlayList = () => {
     };
 
     const handleSongClick = (song) => {
-        setCurrentSong(song);
+        setCurrentSong(song); 
     };
 
     if (isLoading) {
