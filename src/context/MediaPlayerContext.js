@@ -11,6 +11,7 @@ export const MediaPlayerProvider = ({ children }) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isRandom, setIsRandom] = useState(false);
     const [playlist, setPlaylist] = useState([]);
+    const [, setProgress] = useState(0); // Define setProgress here
     const audioRef = useRef(new Audio());
 
     const handleTimeUpdate = useCallback(() => {
@@ -38,25 +39,27 @@ export const MediaPlayerProvider = ({ children }) => {
     }, [playNextTrack]);
 
     useEffect(() => {
+        const audio = audioRef.current; // Capture the current value of audioRef.current
+    
         if (!currentSong) return;
-
-        audioRef.current.src = currentSong.url;
-
-        const playPromise = audioRef.current.play();
+    
+        audio.src = currentSong.url;
+    
+        const playPromise = audio.play();
         if (playPromise !== undefined) {
             playPromise.then(_ => {
             }).catch(error => {
                 console.error('Playback error:', error);
             });
         }
-
-        audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
-        audioRef.current.addEventListener('ended', handleSongEnded);
-
+    
+        audio.addEventListener('timeupdate', handleTimeUpdate);
+        audio.addEventListener('ended', handleSongEnded);
+    
         return () => {
-            audioRef.current.pause();
-            audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
-            audioRef.current.removeEventListener('ended', handleSongEnded);
+            audio.pause();
+            audio.removeEventListener('timeupdate', handleTimeUpdate);
+            audio.removeEventListener('ended', handleSongEnded);
         };
     }, [currentSong, handleTimeUpdate, handleSongEnded]);
 

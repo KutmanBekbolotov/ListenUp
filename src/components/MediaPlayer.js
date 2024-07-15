@@ -86,7 +86,7 @@ const MediaPlayer = ({ songs, currentSong, setCurrentSong }) => {
     };
 
     if (!currentSong) {
-        return <div className="media-controls">No song selected.</div>;
+        return <div className="media-controlss"></div>;
     }
 
     return (
