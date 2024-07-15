@@ -4,10 +4,6 @@
     padding: 0;
     background-color: #f0f0f0;
 } */
-.header{
-    position: absolute;
-    top: 7%;
-}
 /* .container {
     display: flex;
     justify-content: center;
@@ -15,12 +11,14 @@
     height: 100vh;
 } */
 
-.content {
+/* .content {
     text-align: center;
     position: absolute;
-    bottom: 5%;
-}
+    bottom: 3%;
 
+}
+.section-platform{
+} */
 /* .title {
     font-size: 3rem;
     margin-bottom: 1rem;
@@ -31,6 +29,20 @@
     color: #555;
 } */
 
+.hompage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.header{
+margin-bottom: 5rem
+}
+.section-platform{
+    margin-bottom: 10%;
+}
+.content{
+margin-top: 6rem;
+}
 .song-item{
     text-align: left;
     color:#fff;
@@ -110,6 +122,5 @@ body {
         padding: 5px; /* Ещё меньше внутренний отступ для контейнера */
     }
 }
-
 
 

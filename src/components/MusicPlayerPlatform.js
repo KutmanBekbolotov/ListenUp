@@ -97,13 +97,13 @@ const MusicPlayerPlatform = () => {
     return (
         <div className="homepage">
             <Sidebar />
-            <SongSearch onSearch={handleSearch} />
             <header className='header'>
                 <h2>Welcome to Listen Up music platform from <br /> Bulgass Soft Works</h2>
                 <h2>Here you can listen and add any music you want</h2>
             </header>
 
-            <section>
+            <section className='section-platform'>
+            <SongSearch onSearch={handleSearch} />
                 <div className='container-music'>
                     <div className="song-list">
                         {filteredSongs.map((song, index) => (
