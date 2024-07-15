@@ -23,7 +23,7 @@ const SongSearch = ({ songs, onSearch }) => {
         pattern=".*\S.*"
         required
         className="input"
-        // placeholder="Поиск песен..."
+      
         value={searchTerm}
         onChange={handleSearch}
       />

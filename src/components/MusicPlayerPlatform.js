@@ -81,19 +81,21 @@ const MusicPlayerPlatform = () => {
     };
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div>
+            <h1>Loading...</h1>
+            </div>;
     }
 
     if (error) {
-        return <div>Error loading songs: {error.message}</div>;
+        return <div>
+            <h1>Error loading songs:</h1>
+             {error.message}</div>;
     }
 
     return (
         <div className="homepage">
             <Sidebar />
             <SongSearch onSearch={handleSearch} />
-            {currentSong && <MediaPlayer songs={filteredSongs} currentSong={currentSong} setCurrentSong={setCurrentSong} />} {/* Проверяем наличие текущей песни перед отображением MediaPlayer */}
-            
             <header className='header'>
                 <h2>Welcome to Listen Up music platform from <br /> Bulgass Soft Works</h2>
                 <h2>Here you can listen and add any music you want</h2>
@@ -117,8 +119,7 @@ const MusicPlayerPlatform = () => {
             </section>
 
             <footer className="content">
-                <p>Explore genres, discover new artists, and find your favorite songs.</p>
-                <p>&copy; 2024 Listen Up. All rights reserved.</p>
+            {currentSong && <MediaPlayer songs={filteredSongs} currentSong={currentSong} setCurrentSong={setCurrentSong} />} 
             </footer>
         </div>
     );

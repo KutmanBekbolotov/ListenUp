@@ -6,7 +6,7 @@
 
 .media-controls {
   align-items: center;
-  background: rgba(255, 238, 185, 0.3);
+  background: rgba(69, 69, 69, 0.3);
   border: 1px solid #fffaec;
   border-radius: 20px;
   color: rgba(45, 45, 45, 0.17);
@@ -57,7 +57,7 @@
 }
 
 .button-icons {
-  background-color: rgba(255, 165, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 50%;
   padding: 0.8rem;
   font-size: 1.5rem; /* Пример размера иконки */
@@ -131,6 +131,8 @@
 }
 
 .current-song-name{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   color:black;
+  font-size: x-large;
 }
   

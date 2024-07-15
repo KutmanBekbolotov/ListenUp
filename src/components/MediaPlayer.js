@@ -8,7 +8,7 @@ const MediaPlayer = ({ songs, currentSong, setCurrentSong }) => {
     const [isRandom, setIsRandom] = useState(false);
     const [currentSongName, setCurrentSongName] = useState('');
     const [progress, setProgress] = useState(0);
-    const audioRef = useRef(new Audio()); // Initialize audioRef with a new Audio instance
+    const audioRef = useRef(new Audio()); 
 
     const handleTimeUpdate = useCallback(() => {
         const currentTime = audioRef.current.currentTime;
@@ -43,7 +43,7 @@ const MediaPlayer = ({ songs, currentSong, setCurrentSong }) => {
         const playPromise = audioRef.current.play();
         if (playPromise !== undefined) {
             playPromise.then(_ => {
-                // Autoplay started
+                
             }).catch(error => {
                 console.error('Playback error:', error);
             });
