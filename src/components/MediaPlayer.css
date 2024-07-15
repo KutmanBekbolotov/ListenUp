@@ -13,8 +13,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 2rem;
-  padding: 2rem;
+  margin: -2rem;
+  padding: -1rem;
   position: relative;
 }
 .container-media{
@@ -52,7 +52,7 @@
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  width: 20%; /* Пример ширины кнопок */
+  width: 40%; /* Пример ширины кнопок */
   height: 10%; /* Пример высоты кнопок */
 }
 
@@ -60,7 +60,7 @@
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 50%;
   padding: 0.8rem;
-  font-size: 1.5rem; /* Пример размера иконки */
+  font-size: 0.8rem; 
 }
 
 .fa-step-backward,
@@ -70,7 +70,7 @@
 .fa-forward,
 .fa-step-forward,
 .fa-random {
-  font-size: 1.5rem; /* Размер иконок в плеере */
+  font-size: 0.8rem; 
 }
 
 .back-button,
