@@ -1,4 +1,7 @@
-
+.playlist-page{
+    display: flex;
+    flex-direction: column;
+}
 .song-list {
     display: flex;
     flex-direction: column;
@@ -13,7 +16,9 @@
     border-radius: 4px;
     cursor: pointer;
 }
-
+.container-music{
+    margin: 5% 0 15% 0 ;
+}
 /* .song-item{
     text-align: left;
     color:#fff;

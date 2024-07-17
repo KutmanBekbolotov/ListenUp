@@ -7,7 +7,7 @@ import Sidebar from '../sidebar';
 import './PlayList.css';
 import SongSearch from '../MusicSearcher';
 import MediaPlayer from '../MediaPlayer';
-import { useMediaPlayer } from '../../context/MediaPlayerContext'; // Import useMediaPlayer
+import { useMediaPlayer } from '../../context/MediaPlayerContext'; 
 
 const fetchPlaylist = async (uid) => {
     const playlistRef = doc(db, 'playlists', uid);
@@ -50,7 +50,9 @@ const PlayList = () => {
     };
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div>
+            <h1>Loading...</h1>
+            </div>;
     }
 
     if (error) {

@@ -32,7 +32,7 @@ const fetchSongs = async () => {
 };
 
 const MusicPlayerPlatform = () => {
-    const [currentSong, setCurrentSong] = useState(null); // Состояние текущей песни
+    const [currentSong, setCurrentSong] = useState(null); 
     const [filteredSongs, setFilteredSongs] = useState([]);
     const { currentUser } = useAuth();
 
@@ -42,7 +42,7 @@ const MusicPlayerPlatform = () => {
 
     const handleSongClick = (song) => {
         console.log('Clicked song:', song);
-        setCurrentSong(song); // Устанавливаем текущую песню при клике
+        setCurrentSong(song); 
     };
 
     const addToPlaylist = async (song) => {
@@ -116,7 +116,7 @@ const MusicPlayerPlatform = () => {
                         ))}
                     </div>
                 </div>
-            </section>
+</section>
 
             <footer className="content">
             {currentSong && <MediaPlayer songs={filteredSongs} currentSong={currentSong} setCurrentSong={setCurrentSong} />} 
