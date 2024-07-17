@@ -1,8 +1,5 @@
-
-import React, { useState } from 'react';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import React, { useState, useCallback, useMemo } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useQuery } from 'react-query';
 import { db } from '../../firebase';
 import { useAuth } from '../../context/AuthContext';
