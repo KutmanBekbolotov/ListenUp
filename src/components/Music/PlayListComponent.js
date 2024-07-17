@@ -22,7 +22,7 @@ const fetchPlaylist = async (uid) => {
         throw new Error('Плейлист пользователя не найден.');
     }
 };
-
+//const
 const PlayList = () => {
     const { currentUser } = useAuth();
     const { currentSong, setCurrentSong } = useMediaPlayer();
