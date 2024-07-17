@@ -16,7 +16,8 @@
     "react-query": "^3.39.3",
     "react-router-dom": "^6.24.1",
     "react-scripts": "^5.0.1",
-    "web-vitals": "^4.2.1"
+    "web-vitals": "^4.2.1",
+    "@babel/plugin-proposal-private-property-in-object": "^7.16.5"
   },
   "scripts": {
     "start": "react-scripts start",
