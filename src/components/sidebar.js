@@ -46,7 +46,7 @@ const Sidebar = () => {
                     <li>                        <Link to="/uploadmusic" className="menu-link">
                             <i className='bx bxs-cloud-upload'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
-                                <path fill="currentColor" d="M18.944 11.112C18.507 7.67 15.56 5 12 5C9.244 5 6.85 6.611 5.757 9.15C3.609 9.792 2 11.82 2 14c0 2.757 2.243 5 5 5h11c2.206 0 4-1.794 4-4a4.01 4.01 0 0 0-3.056-3.888M13 14v3h-2v-3H8l4-5l4 5z" />                            </svg></i> UploadMusic
+                                <path fill="currentColor" d="M18.944 11.112C18.507 7.67 15.56 5 12 5C9.244 5 6.85 6.611 5.757 9.15C3.609 9.792 2 11.82 2 14c0 2.757 2.243 5 5 5h11c2.206 0 4-1.794 4-4a4.01 4.01 0 0 0-3.056-3.888M13 14v3h-2v-3H8l4-5l4 5z" />                            </svg></i> Upload music
                         </Link>                    </li>
                     <li>                        <Link to="/playlist" className="menu-link">
                             <i className='bx bxs-music-playlist'>
@@ -65,7 +65,7 @@ const Sidebar = () => {
 0 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM10 14a4 4 0 1 1 4-4a4 4 0 0 1-4 4z"/>
                                 </svg>
                             </i> 
-                            Search
+                            Global search
                         </Link>
                     </li>
                 </ul>

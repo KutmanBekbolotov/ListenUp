@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useQuery } from 'react-query';
 import { db } from '../../firebase';
 import { useAuth } from '../../context/AuthContext';
@@ -33,6 +33,48 @@ const PlayList = () => {
             onSuccess: (data) => setFilteredPlaylist(data),
         }
     );
+    const removeFromPlaylist = async (song) => {
+        if (!currentUser) {
+            alert("Please log in to manage your playlist.");
+            return;
+        }
+    
+        try {
+            const playlistRef = doc(db, 'playlists', currentUser.uid);
+            const playlistSnap = await getDoc(playlistRef);
+    
+            if (!playlistSnap.exists()) {
+                console.log("Playlist does not exist for current user.");
+                return;
+            }
+    
+            const playlistData = playlistSnap.data();
+            const songs = playlistData.songs;
+    
+            // Find index of song with given songId
+            const indexToRemove = songs.findIndex(item => item.id === song.uid);
+    
+            if (indexToRemove === -1) {
+                console.log("Song not found in playlist.");
+                return;
+            }
+            document.getElementById('remove')(song).remove();
+    
+            // Remove song from songs array
+            songs.splice(indexToRemove, 1);
+    
+            // Update the playlist document
+            await updateDoc(playlistRef, {
+                songs: songs
+            });
+    
+            console.log("Song removed from playlist!");
+        } catch (error) {
+            console.error("Error removing song from playlist: ", error);
+        }
+        document.getElementById('remove').remove()
+        
+    };
 
     const handleSearch = (searchTerm) => {
         if (searchTerm.trim() === '') {
@@ -63,11 +105,6 @@ const PlayList = () => {
         <div className="playlist-page">
             <Sidebar />
             <SongSearch onSearch={handleSearch} />
-            <MediaPlayer
-                songs={filteredPlaylist}
-                currentSong={currentSong}
-                setCurrentSong={setCurrentSong}
-            />
             <h2>Your Playlist</h2>
             <div className='container-music'>
                 <ul className='song-list'>
@@ -76,10 +113,18 @@ const PlayList = () => {
                             <div className="playlist-song" onClick={() => handleSongClick(song)}>
                                 <p>{song.name.replace(".mp3", "")}</p>
                             </div>
+                            <button className='btn-add' onClick={() => removeFromPlaylist(song)}>
+                                    <img alt='add-music' className='addMusicImg' src='music-add.png' />
+                            </button>
                         </li>
                     ))}
                 </ul>
             </div>
+                    <MediaPlayer
+                        songs={filteredPlaylist}
+                        currentSong={currentSong}
+                        setCurrentSong={setCurrentSong}
+                    />
         </div>
     );
 };
