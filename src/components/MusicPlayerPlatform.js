@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, Suspense, lazy } from 'react';
 import { ref as storageRef, listAll, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc, getDoc, updateDoc, arrayUnion, Timestamp } from 'firebase/firestore';
-import './AppModule.css';
+import './AppModule.css'; 
 import Sidebar from './sidebar';
 import SongSearch from './MusicSearcher';
 import { storage, db } from '../firebase';
@@ -32,7 +32,7 @@ const fetchSongs = async () => {
 };
 
 const MusicPlayerPlatform = () => {
-    const [currentSong, setCurrentSong] = useState(null); 
+    const [currentSong, setCurrentSong] = useState(null);
     const [filteredSongs, setFilteredSongs] = useState([]);
     const { currentUser } = useAuth();
 
@@ -40,12 +40,12 @@ const MusicPlayerPlatform = () => {
         onSuccess: (data) => setFilteredSongs(data),
     });
 
-    const handleSongClick = (song) => {
+    const handleSongClick = useCallback((song) => {
         console.log('Clicked song:', song);
-        setCurrentSong(song); 
-    };
+        setCurrentSong(song);
+    }, []);
 
-    const addToPlaylist = async (song) => {
+    const addToPlaylist = useCallback(async (song) => {
         if (!currentUser) {
             alert("Please log in to add songs to your playlist.");
             return;
@@ -71,25 +71,34 @@ const MusicPlayerPlatform = () => {
         } catch (error) {
             console.error("Error adding song to playlist: ", error);
         }
-    };
+    }, [currentUser]);
 
-    const handleSearch = (term) => {
+    const handleSearch = useCallback((term) => {
         const filtered = songs.filter(song =>
             song.name && song.name.toLowerCase().includes(term.toLowerCase())
         );
         setFilteredSongs(filtered);
-    };
+    }, [songs]);
+
+    const memoizedFilteredSongs = useMemo(() => (
+        filteredSongs.map((song, index) => (
+            <div key={index} className="song-item">
+                <div className='songPlay' onClick={() => handleSongClick(song)}>
+                    {song && song.name ? song.name.replace(".mp3", "") : ''}
+                </div>
+                <button className='btn-add' onClick={() => addToPlaylist(song)}>
+                    <img alt='add-music' className='addMusicImg' src='music-add.png' />
+                </button>
+            </div>
+        ))
+    ), [filteredSongs, handleSongClick, addToPlaylist]);
 
     if (isLoading) {
-        return <div>
-            <h1>Loading...</h1>
-            </div>;
+        return <div><h1>Loading...</h1></div>;
     }
 
     if (error) {
-        return <div>
-            <h1>Error loading songs:</h1>
-             {error.message}</div>;
+        return <div><h1>Error loading songs:</h1>{error.message}</div>;
     }
 
     return (
@@ -101,25 +110,16 @@ const MusicPlayerPlatform = () => {
             </header>
 
             <section className='section-platform'>
-            <SongSearch onSearch={handleSearch} />
+                <SongSearch onSearch={handleSearch} />
                 <div className='container-music'>
                     <div className="song-list">
-                        {filteredSongs.map((song, index) => (
-                            <div key={index} className="song-item">
-                                <div className='songPlay' onClick={() => handleSongClick(song)}>
-                                    {song && song.name ? song.name.replace(".mp3", "") : ''}
-                                </div>
-                                <button className='btn-add' onClick={() => addToPlaylist(song)}>
-                                    <img alt='add-music' className='addMusicImg' src='music-add.png' />
-                                </button>
-                            </div>
-                        ))}
+                        {memoizedFilteredSongs}
                     </div>
                 </div>
-</section>
+            </section>
 
             <footer className="content">
-            {currentSong && <MediaPlayer songs={filteredSongs} currentSong={currentSong} setCurrentSong={setCurrentSong} />} 
+                {currentSong && <MediaPlayer songs={filteredSongs} currentSong={currentSong} setCurrentSong={setCurrentSong} />}
             </footer>
         </div>
     );

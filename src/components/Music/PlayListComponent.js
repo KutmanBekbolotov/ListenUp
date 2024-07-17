@@ -1,5 +1,8 @@
+
 import React, { useState } from 'react';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import React, { useState, useCallback, useMemo } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
 import { useQuery } from 'react-query';
 import { db } from '../../firebase';
 import { useAuth } from '../../context/AuthContext';
@@ -7,7 +10,7 @@ import Sidebar from '../sidebar';
 import './PlayList.css';
 import SongSearch from '../MusicSearcher';
 import MediaPlayer from '../MediaPlayer';
-import { useMediaPlayer } from '../../context/MediaPlayerContext'; 
+import { useMediaPlayer } from '../../context/MediaPlayerContext';
 
 const fetchPlaylist = async (uid) => {
     const playlistRef = doc(db, 'playlists', uid);
@@ -22,7 +25,7 @@ const fetchPlaylist = async (uid) => {
 
 const PlayList = () => {
     const { currentUser } = useAuth();
-    const { currentSong, setCurrentSong } = useMediaPlayer(); 
+    const { currentSong, setCurrentSong } = useMediaPlayer();
     const [filteredPlaylist, setFilteredPlaylist] = useState([]);
 
     const { data: playlist = [], isLoading, error } = useQuery(
@@ -59,11 +62,8 @@ const PlayList = () => {
                 return;
             }
             document.getElementById('remove')(song).remove();
+                songs.splice(indexToRemove, 1);
     
-            // Remove song from songs array
-            songs.splice(indexToRemove, 1);
-    
-            // Update the playlist document
             await updateDoc(playlistRef, {
                 songs: songs
             });
@@ -76,7 +76,23 @@ const PlayList = () => {
         
     };
 
-    const handleSearch = (searchTerm) => {
+    const handleSongClick = useCallback((song) => {
+        setCurrentSong(song);
+    }, [setCurrentSong]);
+
+    const memoizedFilteredPlaylist = useMemo(() => (
+        filteredPlaylist.map((song, index) => (
+            <li key={index} className='song-item'>
+                <div className="playlist-song" onClick={() => handleSongClick(song)}>
+                    <p>{song.name.replace(".mp3", "")}</p>
+                </div>
+            </li>
+        ))
+    ), [filteredPlaylist, handleSongClick]);
+
+    const handleSearch = useCallback((searchTerm) => {
+        if (!playlist) return;
+
         if (searchTerm.trim() === '') {
             setFilteredPlaylist(playlist);
         } else {
@@ -85,16 +101,10 @@ const PlayList = () => {
             );
             setFilteredPlaylist(filtered);
         }
-    };
-
-    const handleSongClick = (song) => {
-        setCurrentSong(song); 
-    };
+    }, [playlist]);
 
     if (isLoading) {
-        return <div>
-            <h1>Loading...</h1>
-            </div>;
+        return <div><h1>Loading...</h1></div>;
     }
 
     if (error) {
@@ -108,6 +118,7 @@ const PlayList = () => {
             <h2>Your Playlist</h2>
             <div className='container-music'>
                 <ul className='song-list'>
+
                     {filteredPlaylist.map((song, index) => (
                         <li key={index} className='song-item'>
                             <div className="playlist-song" onClick={() => handleSongClick(song)}>
@@ -118,6 +129,8 @@ const PlayList = () => {
                             </button>
                         </li>
                     ))}
+
+                    {memoizedFilteredPlaylist}
                 </ul>
             </div>
                     <MediaPlayer

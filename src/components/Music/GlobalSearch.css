@@ -1,0 +1,32 @@
+.global-search-page {
+    display: flex;
+  }
+  
+  .content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  .genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .genre-cover {
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.3s;
+  }
+  
+  .genre-cover img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+  }
+  
+  .genre-cover:hover {
+    transform: scale(1.05);
+  }
+  
