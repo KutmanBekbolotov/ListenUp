@@ -45,11 +45,12 @@ margin-top: 6rem;
 }
 .song-item{
     text-align: left;
-    color:#fff;
+    color:#ffffff;
     font-size: x-large;
+    font-family: 'DejaVu Sans Mono, monospace';
     display: flex;
     align-items: center;
-    margin: 5px;
+    margin-left: 55px;
 }
 .songPlay:hover{
     cursor: pointer;
