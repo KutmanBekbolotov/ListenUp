@@ -4,36 +4,33 @@ import Sidebar from '../sidebar';
 import GenreCover from './GenreCover';
 import MediaPlayer from '../MediaPlayer';
 import './GlobalSearch.css';
+import rockImage from '../../assets/rock.jpg'; 
+import popImage from '../../assets/pop.jpg'; 
+import electronicImage from '../../assets/electronic.jpg';
+import hiphopImage from '../../assets/hiphop.jpg';
+import countryImage from '../../assets/country.jpg';
+import partyImage from '../../assets/party.jpeg';
 
 const SongSearch = lazy(() => import('../MusicSearcher'));
 
 const GlobalSearchComponent = () => {
   const genresQuery = useQuery('genres', () => [
-    { name: 'Rock', image: 'genre-covers/rock.jpg' },
-    { name: 'Pop', image: 'genre-covers/pop.jpg' },
+    { name: 'Rock', image: rockImage },
+    { name: 'Pop', image: popImage },
+    {name: 'Electronic', image: electronicImage},
+    {name: 'Hip-Hop', image: hiphopImage},
+    {name: 'Country', image: countryImage},
+    {name: 'Party-music', image: partyImage},
   ]);
 
   useEffect(() => {
-    if (genresQuery.data) {
-      genresQuery.data.forEach((genre) => {
-        if (!localStorage.getItem(genre.name)) {
-          fetch(genre.image)
-            .then((response) => response.blob())
-            .then((blob) => {
-              const objectURL = URL.createObjectURL(blob);
-              localStorage.setItem(genre.name, objectURL);
-            })
-            .catch((error) => console.error('Ошибка при загрузке изображения:', error));
-        }
-      });
-    }
-  }, [genresQuery.data]);
+  }, []);
 
   return (
     <div className="global-search-page">
       <Sidebar />
       <div className="content">
-        <header>
+      <header>
           <h1>Global Search Page</h1>
           <Suspense fallback={<div>Loading SongSearch...</div>}>
             <SongSearch />

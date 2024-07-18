@@ -11,7 +11,7 @@ const GenreCover = ({ genre }) => {
   return (
     <div className="genre-cover" onClick={handleClick}>
       <img src={genre.image} alt={`${genre.name} cover`} />
-      <h3>{genre.name}</h3>
+      <h2>{genre.name}</h2>
     </div>
   );
 };

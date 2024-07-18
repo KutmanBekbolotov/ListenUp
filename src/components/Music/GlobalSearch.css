@@ -3,6 +3,7 @@
   }
   
   .content {
+    margin-left: 15%;
     flex-grow: 1;
     padding: 20px;
   }
@@ -17,12 +18,13 @@
   .genre-cover {
     cursor: pointer;
     text-align: center;
-    transition: transform 0.3s;
+    transition: transform 0.5s;
+    font-family: Verdana, sans-serif;
   }
   
   .genre-cover img {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: auto;
     border-radius: 10px;
   }
   
