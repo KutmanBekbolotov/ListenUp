@@ -13,6 +13,9 @@ import partyImage from '../../assets/party.jpeg';
 import kpopImage from '../../assets/kpop.jpeg';
 import sleepImage from '../../assets/sleep.jpg';
 import loveImage from '../../assets/love.jpg';
+import jazzImage from '../../assets/jazz.png';
+import classicalImage from '../../assets/classical.jpeg';
+import kidsImage from '../../assets/kids.jpg';
 
 const SongSearch = lazy(() => import('../MusicSearcher'));
 
@@ -27,6 +30,9 @@ const GlobalSearchComponent = () => {
     {name: 'K-pop', image: kpopImage},
     {name: 'Music for sleep', image: sleepImage},
     {name: 'Love', image: loveImage},
+    {name: 'Jazz', image: jazzImage},
+    {name: 'Clsaccical', image: classicalImage},
+    {name: 'Kids&Family', image: kidsImage},
   ]);
 
   useEffect(() => {
