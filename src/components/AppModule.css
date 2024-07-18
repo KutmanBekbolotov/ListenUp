@@ -1,80 +1,69 @@
-/* body {
+body {
     font-family: Arial, sans-serif;
+    line-height: 1.6;
     margin: 0;
     padding: 0;
     background-color: #f0f0f0;
-} */
-/* .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-} */
-
-/* .content {
-    text-align: center;
-    position: absolute;
-    bottom: 3%;
-
-}
-.section-platform{
-} */
-/* .title {
-    font-size: 3rem;
-    margin-bottom: 1rem;
 }
 
-.subtitle {
-    font-size: 1.5rem;
-    color: #555;
-} */
-
-.hompage{
+.hompage {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 1rem; /* Увеличим внутренние отступы */
 }
-.header{
-margin-bottom: 5rem
+
+.header {
+    margin-bottom: 2rem; /* Уменьшили отступ для компактности */
 }
-.section-platform{
-    margin-bottom: 10%;
+
+.section-platform {
+    margin-bottom: 5%;
 }
-.content{
-margin-top: 6rem;
+
+.content {
+    margin-top: 3rem; /* Уменьшили отступ */
+    text-align: center;
 }
-.song-item{
+
+.song-item {
     text-align: left;
-    color:#ffffff;
-    font-size: x-large;
-    font-family: 'DejaVu Sans Mono, monospace';
+    color: #ffffff;
+    font-size: 1rem; /* Уменьшили размер шрифта */
+    font-family: 'DejaVu Sans Mono', monospace;
     display: flex;
     align-items: center;
-    margin-left: 55px;
+    margin-left: 1rem; /* Уменьшили отступ */
+    margin-bottom: 0.5rem; /* Добавили нижний отступ для разделения */
 }
-.songPlay:hover{
+
+.songPlay:hover {
     cursor: pointer;
 }
-.addMusicImg{
-    height: 50px;
-    width: 50px;
+
+.addMusicImg {
+    height: 40px; /* Уменьшили размер */
+    width: 40px; /* Уменьшили размер */
 }
-.btn-add{
-    margin-left: 10px;
+
+.btn-add {
+    margin-left: 0.5rem; /* Уменьшили отступ */
     padding: 0;
     background: none;
     border: none;
 }
-.btn-add:hover{
+
+.btn-add:hover {
     cursor: pointer;
 }
 
-.container-music{
+.container-music {
     overflow-y: auto;
-    height: 600px;
+    max-height: 400px; /* Уменьшили высоту для мобильных устройств */
 }
+
 .container-music::-webkit-scrollbar {
-    width: 10px;
+    width: 8px; /* Уменьшили ширину скроллбара */
 }
 
 .container-music::-webkit-scrollbar-track {
@@ -82,46 +71,58 @@ margin-top: 6rem;
     background-color: #f9f9fd;
     border-radius: 10px;
 }
-  
+
 .container-music::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: linear-gradient(180deg,#ca16a3, #8f288f);
-}
-
-/* Основные стили для текста и элементов */
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
+    background: linear-gradient(180deg, #ca16a3, #8f288f);
 }
 
 /* Стили для мобильных устройств */
 @media screen and (max-width: 768px) {
     body {
-        font-size: 10px; /* Уменьшите размер шрифта */
+        font-size: 12px; /* Увеличили размер шрифта для лучшей читаемости */
     }
 
     h1, h2, h3, h4, h5, h6 {
-        font-size: 0.9em; /* Соответствующее уменьшение для заголовков */
+        font-size: 1.5em; /* Соответствующее уменьшение для заголовков */
     }
 
     .container {
-        padding: 10px; /* Уменьшите внутренний отступ для контейнера */
+        padding: 1rem; /* Увеличили внутренний отступ для контейнера */
+    }
+
+    .song-item {
+        font-size: 0.9rem; /* Уменьшили размер шрифта */
+        margin-left: 0.5rem; /* Уменьшили отступ */
+    }
+
+    .addMusicImg {
+        height: 30px; /* Уменьшили размер */
+        width: 30px; /* Уменьшили размер */
     }
 }
 
 /* Стили для еще меньших устройств */
 @media screen and (max-width: 480px) {
     body {
-        font-size: 12px; /* Ещё меньше размер шрифта */
+        font-size: 10px; /* Ещё больше увеличили размер шрифта */
     }
 
     h1, h2, h3, h4, h5, h6 {
-        font-size: 0.9em; /* Ещё меньше размер для заголовков */
+        font-size: 1.2em; /* Ещё больше уменьшили размер для заголовков */
     }
 
     .container {
-        padding: 5px; /* Ещё меньше внутренний отступ для контейнера */
+        padding: 0.5rem; /* Ещё больше увеличили внутренний отступ для контейнера */
+    }
+
+    .song-item {
+        font-size: 0.8rem; /* Ещё больше уменьшили размер шрифта */
+        margin-left: 0.3rem; /* Уменьшили отступ */
+    }
+
+    .addMusicImg {
+        height: 25px; /* Ещё больше уменьшили размер */
+        width: 25px; /* Ещё больше уменьшили размер */
     }
 }
-
-
