@@ -51,8 +51,8 @@ const PlayList = () => {
             const playlistData = playlistSnap.data();
             const songs = playlistData.songs;
     
-            // Find index of song with given songId
-            const indexToRemove = songs.findIndex(item => item.id === song.uid);
+            // Найти индекс песни с заданным songId
+            const indexToRemove = songs.findIndex(item => item.uid === song.uid);
     
             if (indexToRemove === -1) {
                 console.log("Song not found in playlist.");
@@ -61,16 +61,18 @@ const PlayList = () => {
             document.getElementById('remove')(song).remove();
                 songs.splice(indexToRemove, 1);
     
+            // Update the playlist document
             await updateDoc(playlistRef, {
                 songs: songs
             });
     
-            console.log("Song removed from playlist!");
+            // Обновить состояние компонента
+            setFilteredPlaylist(songs);
+    
+            console.log("Песня удалена из плейлиста!");
         } catch (error) {
-            console.error("Error removing song from playlist: ", error);
+            console.error("Ошибка при удалении песни из плейлиста:", error);
         }
-        document.getElementById('remove').remove()
-        
     };
 
     const handleSongClick = useCallback((song) => {
@@ -117,13 +119,15 @@ const PlayList = () => {
                 <ul className='song-list'>
 
                     {filteredPlaylist.map((song, index) => (
-                        <li key={index} className='song-item'>
+                        <li key={index} id={`song-${song.uid}`} className='song-item'>
                             <div className="playlist-song" onClick={() => handleSongClick(song)}>
                                 <p>{song.name.replace(".mp3", "")}</p>
                             </div>
+                            <div className='btn-delete'>
                             <button className='btn-add' onClick={() => removeFromPlaylist(song)}>
-                                    <img alt='add-music' className='addMusicImg' src='music-add.png' />
+                                    <img alt='remove-music' className='deleteMusic' src='music-remove.png' />
                             </button>
+                            </div>
                         </li>
                     ))}
 

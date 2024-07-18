@@ -61,6 +61,7 @@
     padding: 0;
     background: none;
     border: none;
+    margin-left: 10%;
 }
 .btn-delete:hover{
     cursor: pointer;
