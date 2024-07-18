@@ -1,6 +1,6 @@
-import React, { Suspense, lazy, useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
+import { useQuery } from 'react-query';
 import Sidebar from '../sidebar';
-import GlobalSearch from './GlobalSearch';
 import GenreCover from './GenreCover';
 import './GlobalSearch.css';
 import { useQuery } from 'react-query';
