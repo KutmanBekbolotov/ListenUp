@@ -22,7 +22,7 @@ const Sidebar = () => {
     return (
         <>
             <button className="sidebar-toggle" onClick={toggleSidebar}>
-                {isOpen ? 'Close' : 'Open'}
+                {isOpen ? '<' : '>'}
             </button>
             <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
                 <div className="menu">
