@@ -10,6 +10,9 @@ import electronicImage from '../../assets/electronic.jpg';
 import hiphopImage from '../../assets/hiphop.jpg';
 import countryImage from '../../assets/country.jpg';
 import partyImage from '../../assets/party.jpeg';
+import kpopImage from '../../assets/kpop.jpeg';
+import sleepImage from '../../assets/sleep.jpg';
+import loveImage from '../../assets/love.jpg';
 
 const SongSearch = lazy(() => import('../MusicSearcher'));
 
@@ -21,6 +24,9 @@ const GlobalSearchComponent = () => {
     {name: 'Hip-Hop', image: hiphopImage},
     {name: 'Country', image: countryImage},
     {name: 'Party-music', image: partyImage},
+    {name: 'K-pop', image: kpopImage},
+    {name: 'Music for sleep', image: sleepImage},
+    {name: 'Love', image: loveImage},
   ]);
 
   useEffect(() => {
