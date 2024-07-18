@@ -25,14 +25,14 @@ const SongSearch = lazy(() => import('../MusicSearcher'));
 
 const GlobalSearchComponent = () => {
   const genresQuery = useQuery('genres', () => [
-    { name: 'Rock', image: rockImage },
-    { name: 'Pop', image: popImage },
+    {name: 'Rock', image: rockImage},
+    {name: 'Pop', image: popImage},
     {name: 'Electronic', image: electronicImage},
     {name: 'Hip-Hop', image: hiphopImage},
     {name: 'Country', image: countryImage},
     {name: 'Party-music', image: partyImage},
     {name: 'K-pop', image: kpopImage},
-    {name: 'Music for sleep', image: sleepImage},
+    {name: 'Sleep', image: sleepImage},
     {name: 'Love', image: loveImage},
     {name: 'Jazz', image: jazzImage},
     {name: 'Clsaccical', image: classicalImage},
@@ -51,7 +51,7 @@ const GlobalSearchComponent = () => {
       <Sidebar />
       <div className="content">
       <header>
-          <h1>Global Search Page</h1>
+          <h1>Albums</h1>
           <Suspense fallback={<div>Loading SongSearch...</div>}>
             <SongSearch />
           </Suspense>
