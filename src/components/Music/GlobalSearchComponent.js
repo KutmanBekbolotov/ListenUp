@@ -3,7 +3,8 @@ import { useQuery } from 'react-query';
 import Sidebar from '../sidebar';
 import GenreCover from './GenreCover';
 import './GlobalSearch.css';
-import { useQuery } from 'react-query';
+import GlobalSearch from './GlobalSearch';
+
 
 const SongSearch = lazy(() => import('../MusicSearcher'));
 const MediaPlayer = lazy(() => import('../MediaPlayer'));
