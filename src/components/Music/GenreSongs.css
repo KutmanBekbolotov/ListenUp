@@ -1,0 +1,27 @@
+.genre-songs-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .songs-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .songs-list li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .songs-list li:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .media-player-container {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f9f9f9;
+  }
+  

@@ -11,51 +11,60 @@ export const MediaPlayerProvider = ({ children }) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isRandom, setIsRandom] = useState(false);
     const [playlist, setPlaylist] = useState([]);
-    const [, setProgress] = useState(0); // Define setProgress here
+    const [progress, setProgress] = useState(0); // Define progress here
     const audioRef = useRef(new Audio());
 
+    // Обновление прогресса воспроизведения
     const handleTimeUpdate = useCallback(() => {
-        const currentTime = audioRef.current.currentTime;
-        const duration = audioRef.current.duration;
-        setProgress((currentTime / duration) * 100);
+        const audio = audioRef.current;
+        if (audio.duration) {
+            const currentTime = audio.currentTime;
+            const duration = audio.duration;
+            setProgress((currentTime / duration) * 100);
+        }
     }, []);
 
+    // Воспроизведение следующего трека
     const playNextTrack = useCallback(() => {
         if (!playlist || playlist.length === 0) return;
 
+        let nextSong;
         if (isRandom) {
             let randomIndex = Math.floor(Math.random() * playlist.length);
-            setCurrentSong(playlist[randomIndex]);
+            nextSong = playlist[randomIndex];
         } else {
             const currentIndex = playlist.findIndex(song => song === currentSong);
             const nextIndex = (currentIndex + 1) % playlist.length;
-            setCurrentSong(playlist[nextIndex]);
+            nextSong = playlist[nextIndex];
         }
+        setCurrentSong(nextSong);
         setIsPlaying(true);
-    }, [playlist, currentSong, isRandom, setCurrentSong]);
+    }, [playlist, currentSong, isRandom]);
 
+    // Обработка завершения воспроизведения
     const handleSongEnded = useCallback(() => {
         playNextTrack();
     }, [playNextTrack]);
 
+    // Эффект для установки и воспроизведения песни
     useEffect(() => {
-        const audio = audioRef.current; // Capture the current value of audioRef.current
-    
+        const audio = audioRef.current;
         if (!currentSong) return;
-    
+
         audio.src = currentSong.url;
-    
         const playPromise = audio.play();
+
         if (playPromise !== undefined) {
-            playPromise.then(_ => {
+            playPromise.then(() => {
+                // Song is playing
             }).catch(error => {
                 console.error('Playback error:', error);
             });
         }
-    
+
         audio.addEventListener('timeupdate', handleTimeUpdate);
         audio.addEventListener('ended', handleSongEnded);
-    
+
         return () => {
             audio.pause();
             audio.removeEventListener('timeupdate', handleTimeUpdate);
@@ -63,6 +72,7 @@ export const MediaPlayerProvider = ({ children }) => {
         };
     }, [currentSong, handleTimeUpdate, handleSongEnded]);
 
+    // Эффект для управления воспроизведением
     useEffect(() => {
         if (isPlaying) {
             audioRef.current.play();
@@ -72,7 +82,7 @@ export const MediaPlayerProvider = ({ children }) => {
     }, [isPlaying]);
 
     return (
-        <MediaPlayerContext.Provider value={{ currentSong, setCurrentSong, playlist, setPlaylist, isPlaying, setIsPlaying, isRandom, setIsRandom, audioRef }}>
+        <MediaPlayerContext.Provider value={{ currentSong, setCurrentSong, playlist, setPlaylist, isPlaying, setIsPlaying, isRandom, setIsRandom, progress }}>
             {children}
         </MediaPlayerContext.Provider>
     );

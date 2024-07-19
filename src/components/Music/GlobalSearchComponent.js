@@ -70,7 +70,6 @@ const GlobalSearchComponent = () => {
           </div>
         </main>
       </div>
-      <MediaPlayer />
     </div>
   );
 };

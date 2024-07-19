@@ -6,7 +6,7 @@ import { storage, db } from '../../firebase'; // Обновите путь, ес
 
 // Список жанров
 const genres = [
-  'Rock', 'Pop', 'Electronic', 'Hip-Hop', 'Country',
+  'Rock', 'Pop', 'Electronic', 'Rap','Hip-Hop', 'Country',
   'Party-music', 'K-pop', 'Sleep', 'Love', 'Jazz',
   'Classical', 'Kids&Family', 'Travel', 'Gaming', 'Anime',
   'Soul', 'Top-Chart', 'Training'
