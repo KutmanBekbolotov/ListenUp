@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase';
-import './GenreSongs.css'; // Импорт стилей
+import './GenreSongs.css'; 
 import MediaPlayer from '../MediaPlayer';
 
 const GenreSongs = () => {

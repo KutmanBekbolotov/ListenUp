@@ -22,7 +22,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/upload-music" element={<UploadMusic />} /> {/* Исправлено на нижний регистр для согласованности */}
+              <Route path="/uploadmusic" element={<UploadMusic />} /> {/* Исправлено на нижний регистр для согласованности */}
               <Route path="/playlist" element={<Playlist />} /> {/* Исправлено на нижний регистр для согласованности */}
               <Route path="/search" element={<GlobalSearch />} />
               <Route path="/genre/:genreName" element={<GenreSongs />} />
