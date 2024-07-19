@@ -2,7 +2,6 @@ import React, { useEffect, Suspense, lazy } from 'react';
 import { useQuery } from 'react-query';
 import Sidebar from '../sidebar';
 import GenreCover from './GenreCover';
-import MediaPlayer from '../MediaPlayer';
 import './GlobalSearch.css';
 import rockImage from '../../assets/rock.jpg'; 
 import popImage from '../../assets/pop.jpg'; 
