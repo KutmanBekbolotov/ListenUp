@@ -1,66 +1,122 @@
-import React, { useState } from 'react';
-import { getStorage, ref, listAll, getDownloadURL } from 'firebase/storage';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
-import { firebaseConfig } from '../../firebase'; 
-import { initializeApp } from 'firebase/app';
+import React, { useState, useCallback } from 'react';
+import { ref as storageRef, listAll, getDownloadURL } from 'firebase/storage';
+import { doc, setDoc, getDoc, updateDoc } from 'firebase/firestore';
+import { useQuery } from 'react-query';
+import { storage, db } from '../../firebase'; // Обновите путь, если нужно
 
-const app = initializeApp(firebaseConfig);
-const storage = getStorage(app);
-const db = getFirestore(app);
+// Список жанров
+const genres = [
+  'Rock', 'Pop', 'Electronic', 'Hip-Hop', 'Country',
+  'Party-music', 'K-pop', 'Sleep', 'Love', 'Jazz',
+  'Classical', 'Kids&Family', 'Travel', 'Gaming', 'Anime',
+  'Soul', 'Top-Chart', 'Training'
+];
 
-const UpdateMetadataComponent = () => {
-  const [genre, setGenre] = useState(''); // Для хранения выбранного жанра
-  const [genres, setGenres] = useState(['Rock', 'Pop', 'Electronic', 'Hip-Hop', 'Country']); // Примерные жанры
+const fetchSongs = async () => {
+  const musicRef = storageRef(storage, 'music/');
+  const userFolders = await listAll(musicRef);
 
-  const handleGenreChange = (e) => {
-    setGenre(e.target.value);
-  };
+  const songPromises = userFolders.prefixes.map(async (userFolderRef) => {
+    const userSongs = await listAll(userFolderRef);
 
-  const updateMetadata = async () => {
-    const getAllSongs = async () => {
-      const songsRef = ref(storage, 'music/');
-      const allSongs = await listAll(songsRef);
-
-      const songPromises = allSongs.items.map(async (itemRef) => {
+    return Promise.all(
+      userSongs.items.map(async (itemRef) => {
         const url = await getDownloadURL(itemRef);
         return {
           name: itemRef.name,
-          url: url
+          url,
         };
-      });
+      })
+    );
+  });
 
-      const songs = await Promise.all(songPromises);
-      return songs;
-    };
+  const allSongs = await Promise.all(songPromises);
+  return allSongs.flat();
+};
 
-    const addSongsToFirestore = async (songs) => {
-      const songPromises = songs.map(async (song) => {
-        const songData = {
-          title: song.name.split('.').slice(0, -1).join('.'),
-          artist: 'Unknown Artist',
-          genre: genre || 'Unknown Genre',
-          url: song.url
-        };
+const UpdateMetadataComponent = () => {
+  const [selectedSong, setSelectedSong] = useState(null);
+  const [selectedGenre, setSelectedGenre] = useState('');
+  const { data: songs = [], isLoading, error } = useQuery('songs', fetchSongs);
 
-        const docRef = await addDoc(collection(db, 'songs'), songData);
-        console.log("Document written with ID: ", docRef.id);
-      });
+  const handleSongSelect = useCallback((song) => {
+    setSelectedSong(song);
+    setSelectedGenre(song.genre || ''); // Устанавливаем жанр для выбранной песни
+  }, []);
 
-      await Promise.all(songPromises);
-    };
-
-    getAllSongs().then(addSongsToFirestore).catch(console.error);
+  const handleGenreChange = (e) => {
+    setSelectedGenre(e.target.value);
   };
+
+  const saveGenre = async () => {
+    if (selectedSong) {
+      try {
+        const songRef = doc(db, 'songs', selectedSong.name); // Обновляем документ по имени песни
+
+        const songSnap = await getDoc(songRef);
+
+        if (songSnap.exists()) {
+          // Обновляем жанр существующей песни
+          await updateDoc(songRef, { genre: selectedGenre });
+          console.log("Document updated with ID: ", songRef.id);
+        } else {
+          // Добавляем новую песню с жанром
+          const songData = {
+            title: selectedSong.name.split('.').slice(0, -1).join('.'),
+            artist: 'Unknown Artist',
+            genre: selectedGenre || 'Unknown Genre',
+            url: selectedSong.url
+          };
+
+          await setDoc(songRef, songData);
+          console.log("Document written with ID: ", songRef.id);
+        }
+      } catch (error) {
+        console.error("Error saving genre: ", error);
+      }
+    }
+  };
+
+  if (isLoading) {
+    return <div><h1>Loading...</h1></div>;
+  }
+
+  if (error) {
+    return <div><h1>Error loading songs:</h1>{error.message}</div>;
+  }
 
   return (
     <div>
-      <select value={genre} onChange={handleGenreChange}>
-        <option value="">Select Genre</option>
-        {genres.map((g) => (
-          <option key={g} value={g}>{g}</option>
-        ))}
-      </select>
-      <button onClick={updateMetadata}>Update Song Metadata</button>
+      <h1>Update Song Metadata</h1>
+      <h2>Song List</h2>
+      {songs.length === 0 ? (
+        <p>No songs available.</p>
+      ) : (
+        <ul>
+          {songs.map((song) => (
+            <li key={song.name}>
+              {song.name}
+              <button onClick={() => handleSongSelect(song)}>Select</button>
+            </li>
+          ))}
+        </ul>
+      )}
+      {selectedSong && (
+        <div>
+          <h3>Selected Song: {selectedSong.name}</h3>
+          <p>Current Genre: {selectedSong.genre || 'None'}</p> {/* Показываем текущий жанр */}
+          <h4>Select Genre</h4>
+          <select value={selectedGenre} onChange={handleGenreChange}>
+            <option value="">Select Genre</option>
+            {genres.map((genre) => (
+              <option key={genre} value={genre}>
+                {genre}
+              </option>
+            ))}
+          </select>
+          <button onClick={saveGenre}>Save Genre</button>
+        </div>
+      )}
     </div>
   );
 };

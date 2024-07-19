@@ -22,6 +22,7 @@ import animeImage from '../../assets/anime.jpg';
 import soulImage from '../../assets/soul.jpeg';
 import topchartImage from '../../assets/topchart.jpg';
 import workoutImage from '../../assets/workout.jpg';
+import rapImage from '../../assets/rap.jpg';
 
 const SongSearch = lazy(() => import('../MusicSearcher'));
 
@@ -31,6 +32,7 @@ const GlobalSearchComponent = () => {
     {name: 'Pop', image: popImage},
     {name: 'Electronic', image: electronicImage},
     {name: 'Hip-Hop', image: hiphopImage},
+    {name: 'Rap', image: rapImage},
     {name: 'Country', image: countryImage},
     {name: 'Party-music', image: partyImage},
     {name: 'K-pop', image: kpopImage},
