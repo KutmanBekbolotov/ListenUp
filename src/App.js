@@ -7,7 +7,8 @@ import UploadMusic from './components/Music/UploadMusic';
 import Playlist from './components/Music/PlayList';
 import MediaPlayer from './components/MediaPlayer';
 import GlobalSearch from './components/Music/GlobalSearch';
-import GenreSongs from './components/Music/GenreSongs'; 
+import GenreSongs from './components/Music/GenreSongs';
+import UpdateMetadata from './components/admin/UpdateMetadata'; // Импортируйте обёртку
 import { AuthProvider } from './context/AuthContext';
 import { MediaPlayerProvider } from './context/MediaPlayerContext';
 
@@ -24,7 +25,8 @@ function App() {
               <Route path="/UploadMusic" element={<UploadMusic />} />
               <Route path="/PlayList" element={<Playlist />} />
               <Route path="/search" element={<GlobalSearch />} />
-              <Route path="/genre/:genreName" element={<GenreSongs />} /> 
+              <Route path="/genre/:genreName" element={<GenreSongs />} />
+              <Route path="/update-metadata" element={<UpdateMetadata />} />
             </Routes>
             <MediaPlayer />
           </div>

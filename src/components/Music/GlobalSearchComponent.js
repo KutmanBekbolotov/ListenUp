@@ -20,6 +20,8 @@ import travelImage from '../../assets/travel.jpg';
 import gamingImage from '../../assets/gaming.jpg';
 import animeImage from '../../assets/anime.jpg';
 import soulImage from '../../assets/soul.jpeg';
+import topchartImage from '../../assets/topchart.jpg';
+import workoutImage from '../../assets/workout.jpg';
 
 const SongSearch = lazy(() => import('../MusicSearcher'));
 
@@ -41,6 +43,8 @@ const GlobalSearchComponent = () => {
     {name: 'Gaming', image: gamingImage},
     {name: 'Anime', image: animeImage},
     {name: 'Soul', image: soulImage},
+    {name: 'Top-Chart', image: topchartImage},
+    {name: 'Training', image: workoutImage},
   ]);
 
   useEffect(() => {
