@@ -9,9 +9,10 @@
     padding-top: 20px;
     padding-left: 20px;
     overflow-y: auto;
-    border-radius: 25px;
     height: 100%;
     transition: 0.3s;
+    border-radius: 0 25px 25px 0;
+
 }
 
 .sidebar.open {
@@ -111,23 +112,80 @@
     }
 }
 
+/* Стили для мобильных устройств */
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 8px; /* Увеличили размер шрифта для лучшей читаемости */
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-size: 1.5em; /* Соответствующее уменьшение для заголовков */
+    }
+
+    .container {
+        padding: 1rem; /* Увеличили внутренний отступ для контейнера */
+    }
+
+    .song-item {
+        font-size: 0.9rem; /* Уменьшили размер шрифта */
+        margin-left: 0.5rem; /* Уменьшили отступ */
+    }
+
+    .addMusicImg {
+        height: 30px; /* Уменьшили размер */
+        width: 30px; /* Уменьшили размер */
+    }
+}
+
 /* Стили для еще меньших устройств */
 @media screen and (max-width: 480px) {
+    body {
+        font-size: 10px; /* Ещё больше увеличили размер шрифта */
+    }
     .sidebar {
-        width: 150px; /* Ещё меньше ширина для совсем маленьких устройств */
+        width: 30%; /* Ещё меньше ширина для совсем маленьких устройств */
     }
     
     .sidebar a {
-        font-size: 16px; /* Ещё меньше размер шрифта */
-        padding: 8px 10px; /* Ещё меньше внутренний отступ */
+        font-size: 1rem; /* Ещё меньше размер шрифта */
+        padding: 3%; /* Ещё меньше внутренний отступ */
     }
-
-    .sidebar .logo, .sidebar .menu-title {
-        font-size: 18px; /* Ещё меньше размер шрифта для логотипа и заголовка меню */
-        padding: 8px; /* Ещё меньше внутренний отступ */
-    }
-
     .main-content {
-        margin-left: 150px; /* Соответствующий отступ для основного контента */
+        margin-left: 150px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-size: 1.2em; /* Ещё больше уменьшили размер для заголовков */
+    }
+
+    .container {
+        padding: 0.5rem; /* Ещё больше увеличили внутренний отступ для контейнера */
+    }
+
+    .song-item {
+        font-size: 0.8rem; /* Ещё больше уменьшили размер шрифта */
+        margin-left: 0.3rem; /* Уменьшили отступ */
+    }
+
+    .addMusicImg {
+        height: 25px; /* Ещё больше уменьшили размер */
+        width: 25px; /* Ещё больше уменьшили размер */
+    
+    }
+    .menu ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .menu li {
+        padding: 6% 0%;
+    }
+    
+    .menu-link {
+        display: flex;
+        align-items: center;
+        color: #ccc;
+        text-decoration: none;
     }
 }

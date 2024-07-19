@@ -105,11 +105,12 @@ body {
 /* Стили для еще меньших устройств */
 @media screen and (max-width: 480px) {
     body {
+        width: 100%;
         font-size: 10px; /* Ещё больше увеличили размер шрифта */
     }
 
     h1, h2, h3, h4, h5, h6 {
-        font-size: 1.2em; /* Ещё больше уменьшили размер для заголовков */
+        font-size: 1rem; /* Ещё больше уменьшили размер для заголовков */
     }
 
     .container {
@@ -125,4 +126,9 @@ body {
         height: 25px; /* Ещё больше уменьшили размер */
         width: 25px; /* Ещё больше уменьшили размер */
     }
+    .container-music{
+        width: 400px;
+        overflow-x: hidden;
+    }
+    
 }
