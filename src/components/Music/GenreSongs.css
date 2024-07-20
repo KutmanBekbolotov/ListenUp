@@ -15,12 +15,12 @@
   }
   
   .songs-list li:hover {
-    background-color: #f0f0f0;
+    background-color: #000000;
   }
   
   .media-player-container {
     margin-top: 20px;
-    border: 1px solid #ddd;
+    border: 1px solid #000000;
     padding: 10px;
     background-color: #f9f9f9;
   }
