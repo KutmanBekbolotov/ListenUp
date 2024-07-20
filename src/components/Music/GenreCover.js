@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import './GlobalSearch.css';
 
 const GenreCover = ({ genre }) => {
   const navigate = useNavigate();

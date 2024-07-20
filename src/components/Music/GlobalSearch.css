@@ -1,35 +1,60 @@
 .global-search-page {
-    display:flex;
-  }
-  
-  .content {
-    margin-left: 20%;
-    flex-grow: 1;
-    padding: 20px;
-  }
-  
-  .genres {
-    display:flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    justify-content: center;
-    margin-top: 70%;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Убедитесь, что весь экран используется */
+}
+
+h1 {
+  color: rgb(255, 255, 255);
+  font-size: 40px;
+  text-align: left;
+  visibility: visible;
+}
+
+.content {
+  margin-left: 20%;
+  flex-grow: 1;
+  padding: 20px;
+  height: calc(100vh - 60px); /* Подстройте, чтобы учесть высоту заголовка */
+  overflow: auto; /* Вертикальная и горизонтальная прокрутка при необходимости */
+}
+
+.genres-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.genres-row {
+  display: flex;
+  overflow-x: auto; /* Горизонтальная прокрутка */
+  gap: 10px;
+  padding: 10px 0;
+  scroll-snap-type: x mandatory; /* Ловушка для прокрутки */
+}
+
+.genre-cover {
+  flex: 0 0 auto; /* Отключаем растяжение */
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.5s;
+  font-family: Verdana, sans-serif;
+  scroll-snap-align: center; /* Центрирование при прокрутке */
+}
+
+.genre-cover img {
+  width: 150px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.genre-cover:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
   .genre-cover {
-    cursor: pointer;
-    text-align: center;
-    transition: transform 0.5s;
-    font-family: Verdana, sans-serif;
+    width: 120px;
+    min-width: 120px;
   }
-  
-  .genre-cover img {
-    width: 200px;
-    height: auto;
-    border-radius: 10px;
-  }
-  
-  .genre-cover:hover {
-    transform: scale(1.05);
-  }
-  
+}

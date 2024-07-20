@@ -1,138 +1,71 @@
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-}
-
-.hompage {
+.homepage {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 1rem; /* Увеличим внутренние отступы */
-}
-
-.header {
-    margin-bottom: 2rem; /* Уменьшили отступ для компактности */
-}
-
-.section-platform {
+    padding: 1rem;
+  }
+  
+  .header {
+    margin-bottom: 2rem;
+  }
+  
+  .section-platform {
     margin-bottom: 5%;
-}
-
-.content {
-    margin-top: 3rem; /* Уменьшили отступ */
+  }
+  
+  .content {
+    margin-top: 3rem;
     text-align: center;
-}
-
-.song-item {
+  }
+  
+  .song-item {
     text-align: left;
     color: #ffffff;
-    font-size: 1rem; /* Уменьшили размер шрифта */
+    font-size: 1rem;
     font-family: 'DejaVu Sans Mono', monospace;
     display: flex;
     align-items: center;
-    margin-left: 1rem; /* Уменьшили отступ */
-    margin-bottom: 0.5rem; /* Добавили нижний отступ для разделения */
-}
-
-.songPlay:hover {
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .songPlay:hover {
     cursor: pointer;
-}
-
-.addMusicImg {
-    height: 40px; /* Уменьшили размер */
-    width: 40px; /* Уменьшили размер */
-}
-
-.btn-add {
-    margin-left: 0.5rem; /* Уменьшили отступ */
+  }
+  
+  .addMusicImg {
+    height: 40px;
+    width: 40px;
+  }
+  
+  .btn-add {
+    margin-left: 0.5rem;
     padding: 0;
     background: none;
     border: none;
-}
-
-.btn-add:hover {
+  }
+  
+  .btn-add:hover {
     cursor: pointer;
-}
-
-.container-music {
+  }
+  
+  .container-music {
     overflow-y: auto;
-    max-height: 400px; /* Уменьшили высоту для мобильных устройств */
-}
-
-.container-music::-webkit-scrollbar {
-    width: 8px; /* Уменьшили ширину скроллбара */
-}
-
-.container-music::-webkit-scrollbar-track {
+    max-height: 400px;
+  }
+  
+  .container-music::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .container-music::-webkit-scrollbar-track {
     -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
     background-color: #f9f9fd;
     border-radius: 10px;
-}
-
-.container-music::-webkit-scrollbar-thumb {
+  }
+  
+  .container-music::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background: linear-gradient(180deg, #ca16a3, #8f288f);
-}
-
-/* Стили для мобильных устройств */
-@media screen and (max-width: 768px) {
-    body {
-        font-size: 12px; /* Увеличили размер шрифта для лучшей читаемости */
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-        font-size: 1.5em; /* Соответствующее уменьшение для заголовков */
-    }
-
-    .container {
-        padding: 1rem; /* Увеличили внутренний отступ для контейнера */
-    }
-
-    .song-item {
-        font-size: 0.9rem; /* Уменьшили размер шрифта */
-        margin-left: 0.5rem; /* Уменьшили отступ */
-    }
-
-    .addMusicImg {
-        height: 30px; /* Уменьшили размер */
-        width: 30px; /* Уменьшили размер */
-    }
-}
-
-/* Стили для еще меньших устройств */
-@media screen and (max-width: 480px) {
-    body {
-        width: 100%;
-        font-size: 10px; /* Ещё больше увеличили размер шрифта */
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-        font-size: 1rem; /* Ещё больше уменьшили размер для заголовков */
-    }
-
-    .container {
-        padding: 0.5rem; /* Ещё больше увеличили внутренний отступ для контейнера */
-    }
-
-    .song-item {
-        font-size: 0.8rem; /* Ещё больше уменьшили размер шрифта */
-        margin-left: 0.3rem; /* Уменьшили отступ */
-    }
-
-    .addMusicImg {
-        height: 25px; /* Ещё больше уменьшили размер */
-        width: 25px; /* Ещё больше уменьшили размер */
-    }
-    .container-music{
-        width: 400px;
-        overflow-x: hidden;
-    }
-    .content {
-    margin-top: 3rem; /* Уменьшили отступ */
-    text-align: center;
-}
-
-}
+  }
+  

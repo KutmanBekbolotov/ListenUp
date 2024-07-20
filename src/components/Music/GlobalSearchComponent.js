@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense, lazy } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
 import Sidebar from '../sidebar';
 import GenreCover from './GenreCover';
@@ -23,50 +23,48 @@ import topchartImage from '../../assets/topchart.jpg';
 import workoutImage from '../../assets/workout.jpg';
 import rapImage from '../../assets/rap.jpg';
 
-const SongSearch = lazy(() => import('../MusicSearcher'));
-
 const GlobalSearchComponent = () => {
   const genresQuery = useQuery('genres', () => [
-    {name: 'Rock', image: rockImage},
-    {name: 'Pop', image: popImage},
-    {name: 'Electronic', image: electronicImage},
-    {name: 'Hip-Hop', image: hiphopImage},
-    {name: 'Rap', image: rapImage},
-    {name: 'Country', image: countryImage},
-    {name: 'Party-music', image: partyImage},
-    {name: 'K-pop', image: kpopImage},
-    {name: 'Sleep', image: sleepImage},
-    {name: 'Love', image: loveImage},
-    {name: 'Jazz', image: jazzImage},
-    {name: 'Clsaccical', image: classicalImage},
-    {name: 'Kids&Family', image: kidsImage},
-    {name: 'Travel', image: travelImage},
-    {name: 'Gaming', image: gamingImage},
-    {name: 'Anime', image: animeImage},
-    {name: 'Soul', image: soulImage},
-    {name: 'Top-Chart', image: topchartImage},
-    {name: 'Training', image: workoutImage},
+    { name: 'Rock', image: rockImage },
+    { name: 'Pop', image: popImage },
+    { name: 'Electronic', image: electronicImage },
+    { name: 'Hip-Hop', image: hiphopImage },
+    { name: 'Rap', image: rapImage },
+    { name: 'Country', image: countryImage },
+    { name: 'Party-music', image: partyImage },
+    { name: 'K-pop', image: kpopImage },
+    { name: 'Sleep', image: sleepImage },
+    { name: 'Love', image: loveImage },
+    { name: 'Jazz', image: jazzImage },
+    { name: 'Classical', image: classicalImage },
+    { name: 'Kids&Family', image: kidsImage },
+    { name: 'Travel', image: travelImage },
+    { name: 'Gaming', image: gamingImage },
+    { name: 'Anime', image: animeImage },
+    { name: 'Soul', image: soulImage },
+    { name: 'Top-Chart', image: topchartImage },
+    { name: 'Training', image: workoutImage },
   ]);
-
-  useEffect(() => {
-  }, []);
 
   return (
     <div className="global-search-page">
       <Sidebar />
       <div className="content">
-      <header>
+        <header>
           <h1>Albums</h1>
-          <Suspense fallback={<div>Loading SongSearch...</div>}>
-            <SongSearch />
-          </Suspense>
         </header>
-        <main>
-          <div className="genres">
-            {genresQuery.data && genresQuery.data.map((genre) => (
-              <GenreCover key={genre.name} genre={genre} />
-            ))}
-          </div>
+        <main className="genres-container">
+          {genresQuery.data && genresQuery.data.reduce((rows, genre, index) => {
+            if (index % 4 === 0) rows.push([]);
+            rows[rows.length - 1].push(genre);
+            return rows;
+          }, []).map((row, rowIndex) => (
+            <div className="genres-row" key={rowIndex}>
+              {row.map((genre) => (
+                <GenreCover key={genre.name} genre={genre} />
+              ))}
+            </div>
+          ))}
         </main>
       </div>
     </div>
