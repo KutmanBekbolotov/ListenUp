@@ -1,71 +1,83 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
 .homepage {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 1rem;
-  }
-  
-  .header {
-    margin-bottom: 2rem;
-  }
-  
-  .section-platform {
-    margin-bottom: 5%;
-  }
-  
-  .content {
-    margin-top: 3rem;
-    text-align: center;
-  }
-  
-  .song-item {
-    text-align: left;
-    color: #ffffff;
-    font-size: 1rem;
-    font-family: 'DejaVu Sans Mono', monospace;
-    display: flex;
-    align-items: center;
-    margin-left: 1rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .songPlay:hover {
-    cursor: pointer;
-  }
-  
-  .addMusicImg {
-    height: 40px;
-    width: 40px;
-  }
-  
-  .btn-add {
-    margin-left: 0.5rem;
-    padding: 0;
-    background: none;
-    border: none;
-  }
-  
-  .btn-add:hover {
-    cursor: pointer;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Занимает всю высоту экрана */
+}
+
+.header {
+  margin-bottom: 2rem;
+  text-align: center; /* Центрируем заголовок */
+}
+
+.section-platform {
+  flex: 1; /* Позволяет этому разделу занимать оставшееся пространство */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Горизонтальное центрирование */
+  padding: 20px; /* Внутренний отступ для содержимого */
+}
+
+.content {
+  margin-top: 3rem;
+  text-align: center;
+  padding: 0 20px; /* Внутренний отступ */
+}
+
+.song-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.addMusicImg {
+  height: 40px;
+  width: 40px;
+}
+
+.btn-add {
+  margin-left: 0.5rem;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+.btn-add:hover {
+  cursor: pointer;
+}
+
+.container-music {
+  overflow-y: auto;
+  max-height: 600px; /* Ограничение высоты контейнера музыки */
+  width: 100%; /* Занимает всю ширину доступного пространства */
+  margin-top: 2rem; /* Отступ сверху, чтобы опустить контент вниз */
+}
+
+.container-music::-webkit-scrollbar {
+  width: 10px;
+}
+
+.container-music::-webkit-scrollbar-track {
+  background-color: #f9f9fd;
+  border-radius: 10px;
+}
+
+.container-music::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: linear-gradient(180deg, #ca16a3, #8f288f);
+}
+
+@media (max-width: 768px) {
   .container-music {
-    overflow-y: auto;
-    max-height: 400px;
+    max-height: 400px; /* Уменьшите высоту на меньших экранах */
   }
-  
-  .container-music::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  .container-music::-webkit-scrollbar-track {
-    -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
-    background-color: #f9f9fd;
-    border-radius: 10px;
-  }
-  
-  .container-music::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: linear-gradient(180deg, #ca16a3, #8f288f);
-  }
-  
+}
