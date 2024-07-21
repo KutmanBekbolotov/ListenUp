@@ -33,44 +33,44 @@ const PlayList = () => {
             onSuccess: (data) => setFilteredPlaylist(data),
         }
     );
+
     const removeFromPlaylist = async (song) => {
         if (!currentUser) {
             alert("Please log in to manage your playlist.");
             return;
         }
-    
+
         try {
             const playlistRef = doc(db, 'playlists', currentUser.uid);
             const playlistSnap = await getDoc(playlistRef);
-    
+
             if (!playlistSnap.exists()) {
                 console.log("Playlist does not exist for current user.");
                 return;
             }
-    
+
             const playlistData = playlistSnap.data();
             const songs = playlistData.songs;
-    
+
             // Find index of song with given songId
             const indexToRemove = songs.findIndex(item => item.id === song.uid);
-    
+
             if (indexToRemove === -1) {
                 console.log("Song not found in playlist.");
                 return;
             }
-            document.getElementById('remove')(song).remove();
-                songs.splice(indexToRemove, 1);
-    
+
+            songs.splice(indexToRemove, 1);
+
             await updateDoc(playlistRef, {
                 songs: songs
             });
-    
+
             console.log("Song removed from playlist!");
+            setFilteredPlaylist(songs);
         } catch (error) {
             console.error("Error removing song from playlist: ", error);
         }
-        document.getElementById('remove').remove()
-        
     };
 
     const handleSongClick = useCallback((song) => {
@@ -83,6 +83,9 @@ const PlayList = () => {
                 <div className="playlist-song" onClick={() => handleSongClick(song)}>
                     <p>{song.name.replace(".mp3", "")}</p>
                 </div>
+                <button className='btn-delete' onClick={() => removeFromPlaylist(song)}>
+                    <img alt='delete-music' className='deleteMusic' src='' />
+                </button>
             </li>
         ))
     ), [filteredPlaylist, handleSongClick]);
@@ -115,29 +118,16 @@ const PlayList = () => {
             <h2>Your Playlist</h2>
             <div className='container-music'>
                 <ul className='song-list'>
-
-                    {filteredPlaylist.map((song, index) => (
-                        <li key={index} className='song-item'>
-                            <div className="playlist-song" onClick={() =>
-                            handleSongClick(song)}>
-                            <p>{song.name.replace(".mp3", "")}</p>
-                        </div>
-                        <button className='btn-delete' onClick={() => removeFromPlaylist(song)}>
-                                <img alt='delete-music' className='Delete-music' src='' />
-                        </button>
-                    </li>
-                ))}
-
-                {memoizedFilteredPlaylist}
-            </ul>
+                    {memoizedFilteredPlaylist}
+                </ul>
+            </div>
+            <MediaPlayer
+                songs={filteredPlaylist}
+                currentSong={currentSong}
+                setCurrentSong={setCurrentSong}
+            />
         </div>
-                <MediaPlayer
-                    songs={filteredPlaylist}
-                    currentSong={currentSong}
-                    setCurrentSong={setCurrentSong}
-                />
-    </div>
-);
+    );
 };
 
 export default PlayList;
