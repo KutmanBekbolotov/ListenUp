@@ -122,8 +122,8 @@ const PlayList = () => {
                             handleSongClick(song)}>
                             <p>{song.name.replace(".mp3", "")}</p>
                         </div>
-                        <button className='btn-add' onClick={() => removeFromPlaylist(song)}>
-                                <img alt='add-music' className='addMusicImg' src='music-add.png' />
+                        <button className='btn-delete' onClick={() => removeFromPlaylist(song)}>
+                                <img alt='delete-music' className='Delete-music' src='' />
                         </button>
                     </li>
                 ))}

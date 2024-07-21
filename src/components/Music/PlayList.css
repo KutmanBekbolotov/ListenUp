@@ -47,6 +47,8 @@
     height: 50px;
     width: 50px;
     padding-top: 0;
+    width: 10%;
+    height: 10%;
   }
   
   .btn-delete {
@@ -55,6 +57,8 @@
     background: none;
     border: none;
     margin-left: 10%;
+    width: 10%;
+    height: 10%;
   }
   
   .btn-delete:hover {

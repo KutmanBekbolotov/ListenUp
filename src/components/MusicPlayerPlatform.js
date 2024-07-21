@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback} from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { ref as storageRef, listAll, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc, getDoc, updateDoc, arrayUnion, Timestamp } from 'firebase/firestore';
 import './AppModule.css'; 
@@ -84,7 +84,7 @@ const MusicPlayerPlatform = () => {
         filteredSongs.map((song, index) => (
             <div key={index} className="song-item">
                 <div className='songPlay' onClick={() => handleSongClick(song)}>
-                    {song && song.name ? song.name.replace(".mp3", "") : ''}
+                    {song.name ? song.name.replace(".mp3", "") : 'Unknown Song'}
                 </div>
                 <button className='btn-add' onClick={() => addToPlaylist(song)}>
                     <img alt='add-music' className='addMusicImg' src='music-add.png' />
