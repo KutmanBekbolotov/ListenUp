@@ -52,8 +52,7 @@ const PlayList = () => {
             const playlistData = playlistSnap.data();
             const songs = playlistData.songs;
 
-            // Find index of song with given songId
-            const indexToRemove = songs.findIndex(item => item.id === song.uid);
+            const indexToRemove = songs.findIndex(item => item.id === song.id); // Используем song.id вместо song.uid
 
             if (indexToRemove === -1) {
                 console.log("Song not found in playlist.");
@@ -88,7 +87,7 @@ const PlayList = () => {
                 </button>
             </li>
         ))
-    ), [filteredPlaylist, handleSongClick]);
+    ), [filteredPlaylist, handleSongClick, removeFromPlaylist]); // Добавляем removeFromPlaylist в зависимости
 
     const handleSearch = useCallback((searchTerm) => {
         if (!playlist) return;

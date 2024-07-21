@@ -2,9 +2,8 @@ import React, { useState, useCallback } from 'react';
 import { ref as storageRef, listAll, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc, getDoc, updateDoc } from 'firebase/firestore';
 import { useQuery } from 'react-query';
-import { storage, db } from '../../firebase'; // Обновите путь, если нужно
+import { storage, db } from '../../firebase'; 
 
-// Список жанров
 const genres = [
   'Rock', 'Pop', 'Electronic', 'Rap','Hip-Hop', 'Country',
   'Party-music', 'K-pop', 'Sleep', 'Love', 'Jazz',

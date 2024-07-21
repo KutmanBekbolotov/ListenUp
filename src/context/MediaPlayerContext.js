@@ -11,10 +11,9 @@ export const MediaPlayerProvider = ({ children }) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [isRandom, setIsRandom] = useState(false);
     const [playlist, setPlaylist] = useState([]);
-    const [progress, setProgress] = useState(0); // Define progress here
+    const [progress, setProgress] = useState(0);
     const audioRef = useRef(new Audio());
 
-    // Обновление прогресса воспроизведения
     const handleTimeUpdate = useCallback(() => {
         const audio = audioRef.current;
         if (audio.duration) {
@@ -24,7 +23,6 @@ export const MediaPlayerProvider = ({ children }) => {
         }
     }, []);
 
-    // Воспроизведение следующего трека
     const playNextTrack = useCallback(() => {
         if (!playlist || playlist.length === 0) return;
 
@@ -41,12 +39,10 @@ export const MediaPlayerProvider = ({ children }) => {
         setIsPlaying(true);
     }, [playlist, currentSong, isRandom]);
 
-    // Обработка завершения воспроизведения
     const handleSongEnded = useCallback(() => {
         playNextTrack();
     }, [playNextTrack]);
 
-    // Эффект для установки и воспроизведения песни
     useEffect(() => {
         const audio = audioRef.current;
         if (!currentSong) return;
@@ -56,7 +52,6 @@ export const MediaPlayerProvider = ({ children }) => {
 
         if (playPromise !== undefined) {
             playPromise.then(() => {
-                // Song is playing
             }).catch(error => {
                 console.error('Playback error:', error);
             });
@@ -72,7 +67,6 @@ export const MediaPlayerProvider = ({ children }) => {
         };
     }, [currentSong, handleTimeUpdate, handleSongEnded]);
 
-    // Эффект для управления воспроизведением
     useEffect(() => {
         if (isPlaying) {
             audioRef.current.play();

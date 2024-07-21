@@ -1,10 +1,9 @@
-/* Основные стили для Sidebar */
 .sidebar {
     position: fixed;
     top: 0;
-    left: -250px; /* Скрыть sidebar по умолчанию */
+    left: -250px; 
     bottom: 0;
-    width: 250px; /* Ширина боковой панели по умолчанию */
+    width: 250px; 
     background-color: #000000;
     padding-top: 20px;
     padding-left: 20px;
@@ -91,86 +90,82 @@
     color: #fff;
 }
 
-/* Стили для мобильных устройств */
 @media screen and (max-width: 768px) {
     .sidebar {
-        width: 200px; /* Уменьшите ширину боковой панели для мобильных устройств */
+        width: 200px; 
     }
     
     .sidebar a {
-        font-size: 18px; /* Уменьшите размер шрифта */
-        padding: 10px 15px; /* Уменьшите внутренний отступ */
+        font-size: 18px; 
+        padding: 10px 15px; 
     }
 
     .sidebar .logo, .sidebar .menu-title {
-        font-size: 20px; /* Уменьшите размер шрифта для логотипа и заголовка меню */
-        padding: 10px; /* Уменьшите внутренний отступ */
+        font-size: 20px; 
+        padding: 10px; 
     }
 
     .main-content {
-        margin-left: 200px; /* Соответствующий отступ для основного контента */
+        margin-left: 200px; 
     }
 }
 
-/* Стили для мобильных устройств */
 @media screen and (max-width: 768px) {
     body {
-        font-size: 8px; /* Увеличили размер шрифта для лучшей читаемости */
+        font-size: 8px;
     }
 
     h1, h2, h3, h4, h5, h6 {
-        font-size: 1.5em; /* Соответствующее уменьшение для заголовков */
+        font-size: 1.5em; 
     }
 
     .container {
-        padding: 1rem; /* Увеличили внутренний отступ для контейнера */
+        padding: 1rem; 
     }
 
     .song-item {
-        font-size: 0.9rem; /* Уменьшили размер шрифта */
-        margin-left: 0.5rem; /* Уменьшили отступ */
+        font-size: 0.9rem;
+        margin-left: 0.5rem; 
     }
 
     .addMusicImg {
-        height: 30px; /* Уменьшили размер */
-        width: 30px; /* Уменьшили размер */
+        height: 30px; 
+        width: 30px; 
     }
 }
 
-/* Стили для еще меньших устройств */
 @media screen and (max-width: 480px) {
     body {
-        font-size: 10px; /* Ещё больше увеличили размер шрифта */
+        font-size: 10px; 
     }
     .sidebar {
-        width: 30%; /* Ещё меньше ширина для совсем маленьких устройств */
+        width: 30%; 
     }
     
     .sidebar a {
-        font-size: 1rem; /* Ещё меньше размер шрифта */
-        padding: 3%; /* Ещё меньше внутренний отступ */
+        font-size: 1rem; 
+        padding: 3%; 
     }
     .main-content {
         margin-left: 150px;
     }
 
     h1, h2, h3, h4, h5, h6 {
-        font-size: 1.2em; /* Ещё больше уменьшили размер для заголовков */
+        font-size: 1.2em; 
     }
 
     .container {
-        padding: 0.5rem; /* Ещё больше увеличили внутренний отступ для контейнера */
+        padding: 0.5rem; 
     }
 
     .song-item {
-        font-size: 0.8rem; /* Ещё больше уменьшили размер шрифта */
-        margin-left: 0.3rem; /* Уменьшили отступ */
+        font-size: 0.8rem; 
+        margin-left: 0.3rem; 
     }
 
     .addMusicImg {
-        height: 25px; /* Ещё больше уменьшили размер */
-        width: 25px; /* Ещё больше уменьшили размер */
-    
+        height: 25px; 
+        width: 25px; 
     }
     .menu ul {
         list-style-type: none;

@@ -1,7 +1,7 @@
 .global-search-page {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Убедитесь, что весь экран используется */
+  height: 100vh;
 }
 
 h1 {
@@ -15,8 +15,8 @@ h1 {
   margin-left: 20%;
   flex-grow: 1;
   padding: 20px;
-  height: calc(100vh - 60px); /* Подстройте, чтобы учесть высоту заголовка */
-  overflow: auto; /* Вертикальная и горизонтальная прокрутка при необходимости */
+  height: calc(100vh - 60px); 
+  overflow: auto; 
 }
 
 .genres-container {
@@ -27,19 +27,19 @@ h1 {
 
 .genres-row {
   display: flex;
-  overflow-x: auto; /* Горизонтальная прокрутка */
+  overflow-x: auto; 
   gap: 10px;
   padding: 10px 0;
-  scroll-snap-type: x mandatory; /* Ловушка для прокрутки */
+  scroll-snap-type: x mandatory; 
 }
 
 .genre-cover {
-  flex: 0 0 auto; /* Отключаем растяжение */
+  flex: 0 0 auto; 
   cursor: pointer;
   text-align: center;
   transition: transform 0.5s;
   font-family: Verdana, sans-serif;
-  scroll-snap-align: center; /* Центрирование при прокрутке */
+  scroll-snap-align: center; 
 }
 
 .genre-cover img {
