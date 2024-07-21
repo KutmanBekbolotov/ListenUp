@@ -34,7 +34,7 @@ const PlayList = () => {
         }
     );
 
-    const removeFromPlaylist = async (song) => {
+    const removeFromPlaylist = useCallback(async (song) => {
         if (!currentUser) {
             alert("Please log in to manage your playlist.");
             return;
@@ -52,7 +52,7 @@ const PlayList = () => {
             const playlistData = playlistSnap.data();
             const songs = playlistData.songs;
 
-            const indexToRemove = songs.findIndex(item => item.id === song.id); // Используем song.id вместо song.uid
+            const indexToRemove = songs.findIndex(item => item.id === song.id);
 
             if (indexToRemove === -1) {
                 console.log("Song not found in playlist.");
@@ -70,7 +70,7 @@ const PlayList = () => {
         } catch (error) {
             console.error("Error removing song from playlist: ", error);
         }
-    };
+    }, [currentUser]);
 
     const handleSongClick = useCallback((song) => {
         setCurrentSong(song);
@@ -87,7 +87,7 @@ const PlayList = () => {
                 </button>
             </li>
         ))
-    ), [filteredPlaylist, handleSongClick, removeFromPlaylist]); // Добавляем removeFromPlaylist в зависимости
+    ), [filteredPlaylist, handleSongClick, removeFromPlaylist]);
 
     const handleSearch = useCallback((searchTerm) => {
         if (!playlist) return;
