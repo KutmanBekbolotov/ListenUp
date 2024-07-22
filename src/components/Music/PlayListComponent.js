@@ -83,7 +83,7 @@ const PlayList = () => {
                     <p>{song.name.replace(".mp3", "")}</p>
                 </div>
                 <button className='btn-delete' onClick={() => removeFromPlaylist(song)}>
-                    <img alt='delete-music' className='deleteMusic' src='' />
+                    <img alt='delete-music' className='deleteMusic' src='music-remove.png' />
                 </button>
             </li>
         ))
