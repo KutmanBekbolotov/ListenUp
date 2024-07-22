@@ -3,12 +3,17 @@
   color: #fff;
   border-radius: 10px;
   padding: 10px;
-  width: 500px;
+  width: 100%;
+  max-width: 800px; /* Максимальная ширина, соответствующая ширине контейнера с музыкой */
   margin: auto;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .current-song-name {
@@ -51,10 +56,4 @@
   opacity: 0.7;
 }
 
-@media (max-width: 480px) {
-  .media-controls {
-      width: 90%; 
-      margin: 10px auto;
-      margin-left: 30px;
-  }
-}
+/* Убираем медиазапросы для мобильных устройств */
