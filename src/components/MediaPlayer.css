@@ -4,7 +4,7 @@
   border-radius: 10px;
   padding: 10px;
   width: 100%;
-  max-width: 800px; /* Максимальная ширина, соответствующая ширине контейнера с музыкой */
+  max-width: 500px; 
   margin: auto;
   text-align: center;
   display: flex;
