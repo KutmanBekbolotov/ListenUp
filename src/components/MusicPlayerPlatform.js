@@ -118,7 +118,11 @@ const MusicPlayerPlatform = () => {
                 </div>
             </section>
             <footer className="content">
-                {currentSong && <MediaPlayer songs={filteredSongs} currentSong={currentSong} setCurrentSong={setCurrentSong} />}
+                {currentSong && <MediaPlayer
+                    songs={filteredSongs}
+                    currentSong={currentSong}
+                    setCurrentSong={setCurrentSong}
+                />}
             </footer>
         </div>
     );
