@@ -104,7 +104,7 @@ const MusicPlayerPlatform = () => {
     return (
         <div className="homepage">
             <Sidebar />
-            <header className='header'>
+            <header className='redheader'>
                 <h2>Welcome to Listen Up music platform from <br /> Bulgass Soft Works</h2>
                 <h2>Here you can listen and add any music you want</h2>
             </header>
@@ -117,7 +117,6 @@ const MusicPlayerPlatform = () => {
                     </div>
                 </div>
             </section>
-
             <footer className="content">
                 {currentSong && <MediaPlayer songs={filteredSongs} currentSong={currentSong} setCurrentSong={setCurrentSong} />}
             </footer>

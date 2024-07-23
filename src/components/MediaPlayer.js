@@ -79,7 +79,8 @@ const MediaPlayer = ({ songs, currentSong, setCurrentSong }) => {
                 {currentSong.name ? currentSong.name.replace('.mp3', '') : ''}
             </div>
             <div className="progress-bar-wrapper">
-                <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+                <div className="progress-bar" style={{ width: `${progress}%` }}>
+                </div>
             </div>
             <div className="controls">
                 <button className="control-button" onClick={playPreviousTrack}>
