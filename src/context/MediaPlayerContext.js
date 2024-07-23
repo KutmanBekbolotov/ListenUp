@@ -5,7 +5,7 @@ const MediaPlayerContext = createContext();
 export const MediaPlayerProvider = ({ children }) => {
     const [currentSong, setCurrentSong] = useState(null);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [playlist, setPlaylist] = useState([]); // Добавляем состояние для плейлиста
+    const [playlist, setPlaylist] = useState([]);
 
     const playPreviousTrack = useCallback(() => {
         if (!playlist || playlist.length === 0) return;

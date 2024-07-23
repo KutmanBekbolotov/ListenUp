@@ -3,6 +3,7 @@ import { ref as storageRef, listAll, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc, getDoc, updateDoc } from 'firebase/firestore';
 import { useQuery } from 'react-query';
 import { storage, db } from '../../firebase'; 
+import './UpdateMetadata.css';
 
 const genres = [
   'Rock', 'Pop', 'Electronic', 'Rap','Hip-Hop', 'Country',
@@ -85,7 +86,7 @@ const UpdateMetadataComponent = () => {
   }
 
   return (
-    <div>
+    <div className='Metadata'>
       <h1>Update Song Metadata</h1>
       <h2>Song List</h2>
       {songs.length === 0 ? (
@@ -94,7 +95,7 @@ const UpdateMetadataComponent = () => {
         <ul>
           {songs.map((song) => (
             <li key={song.name}>
-              {song.name}
+              <span>{song.name}</span>
               <button onClick={() => handleSongSelect(song)}>Select</button>
             </li>
           ))}
@@ -113,7 +114,7 @@ const UpdateMetadataComponent = () => {
               </option>
             ))}
           </select>
-          <button onClick={saveGenre}>Save Genre</button>
+          <button className='btn-select' onClick={saveGenre}>Save Genre</button>
         </div>
       )}
     </div>
