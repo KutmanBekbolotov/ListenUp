@@ -8,6 +8,7 @@ import { storage, db } from '../firebase';
 import { useAuth } from '../context/AuthContext';
 import { useQuery } from 'react-query';
 import MediaPlayer from './MediaPlayer';
+import Modal from './Modal'; // Импортируйте компонент модального окна
 
 const fetchSongs = async () => {
     const musicRef = storageRef(storage, 'music/');
@@ -34,6 +35,8 @@ const fetchSongs = async () => {
 const MusicPlayerPlatform = () => {
     const [currentSong, setCurrentSong] = useState(null);
     const [filteredSongs, setFilteredSongs] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
     const { currentUser } = useAuth();
 
     const { data: songs = [], isLoading, error } = useQuery('songs', fetchSongs, {
@@ -67,7 +70,9 @@ const MusicPlayerPlatform = () => {
                 songs: arrayUnion(song)
             });
 
-            console.log("Song added to playlist!");
+            // Открыть модальное окно с уведомлением
+            setModalMessage('Song added to playlist!');
+            setIsModalOpen(true);
         } catch (error) {
             console.error("Error adding song to playlist: ", error);
         }
@@ -124,6 +129,11 @@ const MusicPlayerPlatform = () => {
                     setCurrentSong={setCurrentSong}
                 />}
             </footer>
+            <Modal 
+                isOpen={isModalOpen} 
+                onClose={() => setIsModalOpen(false)} 
+                message={modalMessage} 
+            />
         </div>
     );
 };
