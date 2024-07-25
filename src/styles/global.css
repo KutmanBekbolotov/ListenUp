@@ -1,4 +1,3 @@
-/* Глобальные стили для сброса отступов и границ */
 * {
   margin: 0;
   padding: 0;
@@ -9,7 +8,6 @@ html, body {
   height: 100%;
 }
 
-/* Основной контейнер страницы */
 .Metadata {
   max-width: 800px;
   margin: 0 auto;
@@ -44,7 +42,7 @@ html, body {
 }
 
 .Metadata ul li span {
-  color: #000; /* Названия песен черные */
+  color: #000; 
 }
 
 .Metadata ul li button {
