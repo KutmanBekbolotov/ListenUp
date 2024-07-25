@@ -57,62 +57,66 @@ const UploadMusic = () => {
     return (
         <div className="upload-container">
             <Sidebar />
-            <div className="upload-header">
-                <h2>Upload Your Music</h2>
-            </div>
-            <div className="upload-form">
-                <form onSubmit={handleUpload}>
-                    <div className="form-group">
-                        <label htmlFor="username">Your Username:</label>
-                        <input
-                            type="text"
-                            id="username"
-                            name="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="songTitle">Song Title:</label>
-                        <input
-                            type="text"
-                            id="songTitle"
-                            name="songTitle"
-                            value={songTitle}
-                            onChange={(e) => setSongTitle(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="artist">Artist:</label>
-                        <input
-                            type="text"
-                            id="artist"
-                            name="artist"
-                            value={artist}
-                            onChange={(e) => setArtist(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="file">Choose File:</label>
-                        <input
-                            type="file"
-                            id="file"
-                            name="file"
-                            accept=".mp3, .mp4, .wav, .aac, .ogg, .flac"
-                            onChange={handleFileChange}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <button className='btnUpload' type="submit">Upload</button>
-                    </div>
-                    {uploadProgress > 0 && <p>Upload Progress: {uploadProgress}%</p>}
-                    {error && <p className="error-message">{error}</p>}
-                    {success && <p className="success-message">{success}</p>}
-                </form>
+            <div className="upload-card">
+                <div className="upload-header">
+                    <h2>Upload Your Music</h2>
+                </div>
+                <div className="upload-form">
+                    <form onSubmit={handleUpload}>
+                        <div className="form-group">
+                            <label htmlFor="username">Your Username:</label>
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="songTitle">Song Title:</label>
+                            <input
+                                type="text"
+                                id="songTitle"
+                                name="songTitle"
+                                value={songTitle}
+                                onChange={(e) => setSongTitle(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="artist">Artist:</label>
+                            <input
+                                type="text"
+                                id="artist"
+                                name="artist"
+                                value={artist}
+                                onChange={(e) => setArtist(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="file">Choose File:</label>
+                            <input style = {{
+                                color:"gray",
+                            }}
+                                type="file"
+                                id="file"
+                                name="file"
+                                accept=".mp3, .mp4, .wav, .aac, .ogg, .flac"
+                                onChange={handleFileChange}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <button className='btnUpload' type="submit">Upload</button>
+                        </div>
+                        {uploadProgress > 0 && <p>Upload Progress: {uploadProgress}%</p>}
+                        {error && <p className="error-message">{error}</p>}
+                        {success && <p className="success-message">{success}</p>}
+                    </form>
+                </div>
             </div>
         </div>
     );
