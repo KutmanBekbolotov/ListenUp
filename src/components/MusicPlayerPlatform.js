@@ -8,7 +8,8 @@ import { storage, db } from '../firebase';
 import { useAuth } from '../context/AuthContext';
 import { useQuery } from 'react-query';
 import MediaPlayer from './MediaPlayer';
-import Modal from './Modal'; // Импортируйте компонент модального окна
+import Modal from './Modal';
+import Loader from "./loader"; // Импортируйте компонент модального окна
 
 const fetchSongs = async () => {
     const musicRef = storageRef(storage, 'music/');
@@ -99,9 +100,8 @@ const MusicPlayerPlatform = () => {
     ), [filteredSongs, handleSongClick, addToPlaylist]);
 
     if (isLoading) {
-        return <div><h1>Loading...</h1></div>;
+        return <Loader/>
     }
-
     if (error) {
         return <div><h1>Error loading songs:</h1>{error.message}</div>;
     }

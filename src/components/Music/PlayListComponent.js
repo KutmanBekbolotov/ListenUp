@@ -8,6 +8,7 @@ import './PlayList.css';
 import SongSearch from '../MusicSearcher';
 import MediaPlayer from '../MediaPlayer';
 import { useMediaPlayer } from '../../context/MediaPlayerContext';
+import Loader from "../loader";
 
 const fetchPlaylist = async (uid) => {
     const playlistRef = doc(db, 'playlists', uid);
@@ -103,7 +104,7 @@ const PlayList = () => {
     }, [playlist]);
 
     if (isLoading) {
-        return <div><h1>Loading...</h1></div>;
+        return <Loader/>;
     }
 
     if (error) {

@@ -4,6 +4,7 @@ import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase';
 import './GenreSongs.css'; 
 import MediaPlayer from '../MediaPlayer';
+import Loader from "../loader";
 
 const GenreSongs = () => {
   const { genreName } = useParams();
@@ -11,7 +12,7 @@ const GenreSongs = () => {
   const [filteredSongs, setFilteredSongs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [currentSong, setCurrentSong] = useState(null); 
+  const [currentSong, setCurrentSong] = useState(null);
 
   useEffect(() => {
     const fetchSongs = async () => {
@@ -49,10 +50,10 @@ const GenreSongs = () => {
 
   const handleSongClick = useCallback((song) => {
     setCurrentSong(song);
-  }, []);
+  }, [setCurrentSong]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader/>;
   }
 
   if (error) {
