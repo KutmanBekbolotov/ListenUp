@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { ref as storageRef, listAll, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc, getDoc, updateDoc, arrayUnion, Timestamp } from 'firebase/firestore';
 import './AppModule.css'; 
@@ -6,10 +6,11 @@ import Sidebar from './sidebar';
 import SongSearch from './MusicSearcher';
 import { storage, db } from '../firebase';
 import { useAuth } from '../context/AuthContext';
-import { useQuery } from 'react-query';
+import {setLogger, useQuery} from 'react-query';
 import MediaPlayer from './MediaPlayer';
 import Modal from './Modal';
-import Loader from "./loader"; // Импортируйте компонент модального окна
+import Loader from "./loader";
+import Skeletonchik from "./skeletonchik"; // Импортируйте компонент модального окна
 
 const fetchSongs = async () => {
     const musicRef = storageRef(storage, 'music/');
@@ -38,7 +39,14 @@ const MusicPlayerPlatform = () => {
     const [filteredSongs, setFilteredSongs] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
+    const [skeleton, setSkeleton] = useState (true);
     const { currentUser } = useAuth();
+
+    useEffect(()=>{
+        setTimeout(()=>{
+            setSkeleton(false)
+        }, 1000)
+    }, []);
 
     const { data: songs = [], isLoading, error } = useQuery('songs', fetchSongs, {
         onSuccess: (data) => setFilteredSongs(data),
@@ -99,6 +107,7 @@ const MusicPlayerPlatform = () => {
         ))
     ), [filteredSongs, handleSongClick, addToPlaylist]);
 
+
     if (isLoading) {
         return <Loader/>
     }
@@ -116,11 +125,14 @@ const MusicPlayerPlatform = () => {
 
             <section className='section-platform'>
                 <SongSearch onSearch={handleSearch} />
-                <div className='container-music'>
-                    <div className="song-list">
-                        {memoizedFilteredSongs}
-                    </div>
-                </div>
+                {
+                    skeleton ? <Skeletonchik/> :
+                        <div className='container-music'>
+                            <div className="song-list">
+                                {memoizedFilteredSongs}
+                            </div>
+                        </div>
+                }
             </section>
             <footer className="content">
                 {currentSong && <MediaPlayer

@@ -50,7 +50,7 @@ const GenreSongs = () => {
 
   const handleSongClick = useCallback((song) => {
     setCurrentSong(song);
-  }, [setCurrentSong]);
+  }, []);
 
   if (loading) {
     return <Loader/>;
@@ -67,7 +67,7 @@ const GenreSongs = () => {
         <ul className="songs-list">
           {songs.map((song, index) => (
             <li key={index} onClick={() => handleSongClick(song)}>
-              {song.title} by {song.artist}
+              {song.title}
             </li>
           ))}
         </ul>
