@@ -94,9 +94,12 @@
       align-self: flex-end;
   }
 
-  .addMusicImg {
-      width: 15px;
-      height: 15px;
+    .addMusicImg {
+        height: 25px; /* Ещё больше уменьшили размер */
+        width: 25px; /* Ещё больше уменьшили размер */
+    }
+    .container-music{
+        width: 400px;
+        overflow-x: hidden;
+    }
   }
-}
-
