@@ -11,6 +11,7 @@ import MediaPlayer from './MediaPlayer';
 import Modal from './Modal';
 import Loader from "./loader";
 import Skeletonchik from "./skeletonchik"; // Импортируйте компонент модального окна
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const fetchSongs = async () => {
     const musicRef = storageRef(storage, 'music/');
@@ -124,12 +125,14 @@ const MusicPlayerPlatform = () => {
             </header>
 
             <section className='section-platform'>
-                <SongSearch onSearch={handleSearch} />
                 {
                     skeleton ? <Skeletonchik/> :
-                        <div className='container-music'>
-                            <div className="song-list">
-                                {memoizedFilteredSongs}
+                        <div>
+                            <SongSearch onSearch={handleSearch} />
+                            <div className='container-music'>
+                                <div className="song-list">
+                                    {memoizedFilteredSongs}
+                                </div>
                             </div>
                         </div>
                 }
