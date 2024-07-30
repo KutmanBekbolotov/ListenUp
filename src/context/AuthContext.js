@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 const AuthContext = createContext();
 
@@ -8,12 +9,38 @@ export const useAuth = () => {
     return useContext(AuthContext);
 };
 
+// Функция для создания или обновления пользователя в Firestore
+const createOrUpdateUser = async (user) => {
+    try {
+        const userDocRef = doc(db, 'users', user.uid);
+        const userDoc = await getDoc(userDocRef);
+        if (!userDoc.exists()) {
+            await setDoc(userDocRef, {
+                userId: user.uid,
+                email: user.email,
+                displayName: user.displayName,
+            });
+        } else {
+            await setDoc(userDocRef, {
+                userId: user.uid,
+                email: user.email,
+                displayName: user.displayName,
+            }, { merge: true });
+        }
+    } catch (error) {
+        console.error('Ошибка создания или обновления пользователя: ', error);
+    }
+};
+
 export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, user => {
+        const unsubscribe = onAuthStateChanged(auth, async user => {
+            if (user) {
+                await createOrUpdateUser(user); // Добавляем или обновляем пользователя в Firestore
+            }
             setCurrentUser(user);
             setLoading(false);
         });
