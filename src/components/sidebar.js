@@ -80,6 +80,17 @@ const Sidebar = () => {
                                 </svg></i> Login
                             </Link>
                         </li>
+                        <li>
+    <Link to="/bite-emotions" className="menu-link">
+        <i className='bx bxs-bite'>
+            <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm-1 16v-5H7l6-7v5h4l-6 7z"/>
+            </svg>
+        </i> 
+        Bite Emotions
+    </Link>
+</li>
+
                     </ul>
 
                     {currentUser ? (

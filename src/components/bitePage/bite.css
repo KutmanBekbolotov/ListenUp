@@ -1,0 +1,52 @@
+.bite-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .update-nickname {
+    margin-bottom: 20px;
+  }
+  
+  .update-nickname form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+  }
+  
+  .update-nickname input {
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 16px;
+  }
+  
+  .update-nickname button {
+    padding: 8px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .send-emotion {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .bite-component select,
+  .bite-component button {
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 16px;
+  }
+  
+  .bite-component button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .error {
+    color: red;
+  }
+  
