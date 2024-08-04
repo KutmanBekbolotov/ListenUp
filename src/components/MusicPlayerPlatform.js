@@ -10,7 +10,7 @@ import {setLogger, useQuery} from 'react-query';
 import MediaPlayer from './MediaPlayer';
 import Modal from './Modal';
 import Loader from "./loader";
-import Skeletonchik from "./skeletonchik"; // Импортируйте компонент модального окна
+import Skeletonchik from "./skeletonchik"; 
 import 'react-loading-skeleton/dist/skeleton.css'
 
 const fetchSongs = async () => {
@@ -80,7 +80,6 @@ const MusicPlayerPlatform = () => {
                 songs: arrayUnion(song)
             });
 
-            // Открыть модальное окно с уведомлением
             setModalMessage('Song added to playlist!');
             setIsModalOpen(true);
         } catch (error) {

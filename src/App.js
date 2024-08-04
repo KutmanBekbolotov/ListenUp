@@ -8,8 +8,7 @@ import Playlist from './components/Music/PlayList';
 import MediaPlayer from './components/MediaPlayer';
 import GlobalSearch from './components/Music/GlobalSearch';
 import GenreSongs from './components/Music/GenreSongs';
-import UpdateMetadata from './components/admin/UpdateMetadata';
-import BitePage from './components/bitePage/bite'; 
+import UpdateMetadata from './components/admin/UpdateMetadata'; 
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { MediaPlayerProvider } from './context/MediaPlayerContext';
 
@@ -33,7 +32,6 @@ function App() {
               <Route path="/global-search" element={<GlobalSearch />} />
               <Route path="/genre/:genreName" element={<PrivateRoute><GenreSongs /></PrivateRoute>} />
               <Route path="/update-metadata" element={<PrivateRoute><UpdateMetadata /></PrivateRoute>} />
-              <Route path="/bite-emotions" element={<PrivateRoute><BitePage /></PrivateRoute>} /> {/* Новый маршрут */}
               <Route path="*" element={<Navigate to="/global-search" />} />
             </Routes>
             <MediaPlayer />
