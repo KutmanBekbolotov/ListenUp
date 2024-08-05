@@ -66,22 +66,26 @@ const Sidebar = () => {
                                     </svg></i> Upload music
                             </Link>                    
                         </li>
-                        <li>
-                            <Link to="/signup" className="menu-link">
-                                <i className='bx bxs-user-circle'>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
-                                    <path fill="currentColor" d="M12 2C6.579 2 2 6.579 2 12s4.579 10 10 10s10-4.579 10-10S17.421 2 12 2m0 5c1.727 0 3 1.272 3 3s-1.273 3-3 3c-1.726 0-3-1.272-3-3s1.274-3 3-3m-5.106 9.772c.897-1.32 2.393-2.2 4.106-2.2h2c1.714 0 3.209.88 4.106 2.2C15.828 18.14 14.015 19 12 19s-3.828-.86-5.106-2.228" />                            </svg></i> Signup
-                            </Link>                   
-                        </li>
-                        <li>
-                            <Link to="/login" className="menu-link">
-                                <i className='bx bxs-log-in-circle'><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
-                                    <path fill="currentColor" d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4l-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9"/>
-                                </svg></i> Login
-                            </Link>
-                        </li>
+                        {currentUser ? null : (
+                            <li>
+                                <Link to="/signup" className="menu-link">
+                                    <i className='bx bxs-user-circle'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 2C6.579 2 2 6.579 2 12s4.579 10 10 10s10-4.579 10-10S17.421 2 12 2m0 5c1.727 0 3 1.272 3 3s-1.273 3-3 3c-1.726 0-3-1.272-3-3s1.274-3 3-3m-5.106 9.772c.897-1.32 2.393-2.2 4.106-2.2h2c1.714 0 3.209.88 4.106 2.2C15.828 18.14 14.015 19 12 19s-3.828-.86-5.106-2.228" />
+                                        </svg></i> Signup
+                                </Link>
+                            </li>
+                        )}
+                        {currentUser ? null : (
+                            <li>
+                                <Link to="/login" className="menu-link">
+                                    <i className='bx bxs-log-in-circle'><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M12 3c-4.625 0-8.442 3.507-8.941 8.001H10v-3l5 4l-5 4v-3H3.06C3.56 17.494 7.376 21 12 21c4.963 0 9-4.037 9-9s-4.037-9-9-9"/>
+                                    </svg></i> Login
+                                </Link>
+                            </li>
+                        )}
                     </ul>
-
                     {currentUser ? (
                         <div className='container-user'>
                             <div className='user'>
@@ -90,7 +94,6 @@ const Sidebar = () => {
                             <div className='log-out' onClick={handleLogout}>Log out</div>
                         </div>
                     ) : null}
-                    
                 </div>
             </aside>
         </>

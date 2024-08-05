@@ -7,13 +7,14 @@ import './Signup.css';
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleSignUp = async (event) => {
     event.preventDefault();
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password, username);
       const user = userCredential.user;
       console.log('User signed up:', user.uid);
       navigate('/'); 
@@ -25,9 +26,6 @@ const Signup = () => {
   return (
     <div className="signup-card-container">
       <div className="signup-card">
-        <div className="signup-card-logo">
-          <img src="logo.gif" alt="logo" />
-        </div>
         <div className="signup-card-header">
           <h1>Sign Up</h1>
           <div>Create a new account</div>
@@ -42,6 +40,17 @@ const Signup = () => {
               onChange={(e) => setEmail(e.target.value)}
               autoFocus
               required
+            />
+          </div>
+          <div className="form-item">
+            <span className="form-item-icon material-symbols-rounded"></span>
+            <input
+                type="text"
+                placeholder="Enter Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                autoFocus
+                required
             />
           </div>
           <div className="form-item">
