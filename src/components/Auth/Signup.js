@@ -7,14 +7,14 @@ import './Signup.css';
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
+  const [displayName, setDisplayName] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleSignUp = async (event) => {
     event.preventDefault();
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password, username);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password, displayName);
       const user = userCredential.user;
       console.log('User signed up:', user.uid);
       navigate('/'); 
@@ -47,8 +47,8 @@ const Signup = () => {
             <input
                 type="text"
                 placeholder="Enter Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
                 autoFocus
                 required
             />
