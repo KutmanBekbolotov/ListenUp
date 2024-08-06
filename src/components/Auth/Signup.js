@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../firebase'; 
+import {auth, db} from '../../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import './Signup.css';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [displayName, setDisplayName] = useState('');
+  const [username, setUsername] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleSignUp = async (event) => {
     event.preventDefault();
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password, displayName);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password, username);
       const user = userCredential.user;
       console.log('User signed up:', user.uid);
       navigate('/'); 
@@ -47,8 +47,8 @@ const Signup = () => {
             <input
                 type="text"
                 placeholder="Enter Username"
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
+                value={username}
+                onChange={(e )=> setUsername(e.target.value)}
                 autoFocus
                 required
             />

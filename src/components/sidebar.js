@@ -89,7 +89,7 @@ const Sidebar = () => {
                     {currentUser ? (
                         <div className='container-user'>
                             <div className='user'>
-                                <div className='user-name'>{currentUser.displayName ? currentUser.displayName.charAt(0).toUpperCase() : ''}</div>
+                                <div className='user-name'>{currentUser.email.replace("@gmail.com", "")}</div>
                             </div>
                             <div className='log-out' onClick={handleLogout}>Log out</div>
                         </div>
