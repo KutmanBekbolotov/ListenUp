@@ -1,25 +1,22 @@
-.loader{
-    width: 50px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: #000;
-    box-shadow: 0 0 0 0 #0004;
-    animation: l2 1.5s infinite linear;
+.loader {
     position: relative;
-}
-.loader:before,
-.loader:after {
-    content: "";
+    width: 100px;
+    height: 100px;
+  }
+  
+  .loader:before , .loader:after{
+    content: '';
+    border-radius: 50%;
     position: absolute;
     inset: 0;
-    border-radius: inherit;
-    box-shadow: 0 0 0 0 #0004;
-    animation: inherit;
-    animation-delay: -0.5s;
-}
-.loader:after {
-    animation-delay: -1s;
-}
-@keyframes l2 {
-    100% {box-shadow: 0 0 0 40px #0000}
-}
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.5) inset;
+  }
+  .loader:after {
+    box-shadow: 0 2px 0 #1dd9f1 inset;
+    animation: rotate 2s linear infinite;
+  }
+  
+  @keyframes rotate {
+    0% {  transform: rotate(0)}
+    100% { transform: rotate(360deg)}
+  }
