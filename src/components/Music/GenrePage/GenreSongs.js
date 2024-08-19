@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase';
+import { db } from '../../../firebase';
 import './GenreSongs.css'; 
 import MediaPlayer from '../MediaPlayer';
 import Loader from "../loader";

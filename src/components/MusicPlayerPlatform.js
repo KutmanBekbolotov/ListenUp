@@ -2,16 +2,15 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { ref as storageRef, listAll, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc, getDoc, updateDoc, arrayUnion, Timestamp } from 'firebase/firestore';
 import './AppModule.css'; 
-import Sidebar from './sidebar';
-import SongSearch from './MusicSearcher';
+import Sidebar from './SubComponents/Sidebar/sidebar';
+import SongSearch from './SubComponents/Searcher/MusicSearcher';
 import { storage, db } from '../firebase';
-import { useAuth } from '../context/AuthContext';
-import { useQuery } from 'react-query';
-import MediaPlayer from './MediaPlayer';
-import Modal from './Modal';
-import Loader from "./loader";
-import Skeletonchik from "./skeletonchik"; 
-import 'react-loading-skeleton/dist/skeleton.css'
+import MediaPlayer from './SubComponents/MediaPlayer/MediaPlayer';
+import Modal from './SubComponents/ModalWindows/Modal';
+import Loader from "./SubComponents/LoaderAnimation/loader";
+import Skeletonchik from "./SubComponents/Skeleton/skeletonchik"; 
+import 'react-loading-skeleton/dist/skeleton.css';
+import { useAuth } from '../context/AuthContext'; 
 
 const fetchSongs = async () => {
     const musicRef = storageRef(storage, 'music/');
@@ -38,20 +37,39 @@ const fetchSongs = async () => {
 const MusicPlayerPlatform = () => {
     const [currentSong, setCurrentSong] = useState(null);
     const [filteredSongs, setFilteredSongs] = useState([]);
+    const [allSongs, setAllSongs] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [skeleton, setSkeleton] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
-    const [skeleton, setSkeleton] = useState (true);
-    const { currentUser } = useAuth();
+    const { currentUser } = useAuth(); 
 
-    useEffect(()=>{
-        setTimeout(()=>{
-            setSkeleton(false)
-        }, 1000)
+    useEffect(() => {
+        const loadSongs = async () => {
+            try {
+                const songs = await fetchSongs();
+                setAllSongs(songs);
+                setFilteredSongs(songs);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error loading songs: ", error);
+                setLoading(false);
+            }
+        };
+
+        loadSongs();
+
+        setTimeout(() => {
+            setSkeleton(false);
+        }, 1000);
     }, []);
 
-    const { data: songs = [], isLoading, error } = useQuery('songs', fetchSongs, {
-        onSuccess: (data) => setFilteredSongs(data),
-    });
+    const handleSearch = useCallback((term) => {
+        const filtered = allSongs.filter(song =>
+            song.name && song.name.toLowerCase().includes(term.toLowerCase())
+        );
+        setFilteredSongs(filtered);
+    }, [allSongs]);
 
     const handleSongClick = useCallback((song) => {
         console.log('Clicked song:', song);
@@ -87,32 +105,8 @@ const MusicPlayerPlatform = () => {
         }
     }, [currentUser]);
 
-    const handleSearch = useCallback((term) => {
-        const filtered = songs.filter(song =>
-            song.name && song.name.toLowerCase().includes(term.toLowerCase())
-        );
-        setFilteredSongs(filtered);
-    }, [songs]);
-
-    const memoizedFilteredSongs = useMemo(() => (
-        filteredSongs.map((song, index) => (
-            <div key={index} className="song-item">
-                <div className='songPlay' onClick={() => handleSongClick(song)}>
-                    {song.name ? song.name.replace(".mp3", "") : 'Unknown Song'}
-                </div>
-                <button className='btn-add' onClick={() => addToPlaylist(song)}>
-                    <img alt='add-music' className='addMusicImg' src='music-add.png' />
-                </button>
-            </div>
-        ))
-    ), [filteredSongs, handleSongClick, addToPlaylist]);
-
-
-    if (isLoading) {
-        return <Loader/>
-    }
-    if (error) {
-        return <div><h1>Error loading songs:</h1>{error.message}</div>;
+    if (loading) {
+        return <Loader />;
     }
 
     return (
@@ -125,12 +119,21 @@ const MusicPlayerPlatform = () => {
 
             <section className='section-platform'>
                 {
-                    skeleton ? <Skeletonchik/> :
+                    skeleton ? <Skeletonchik /> :
                         <div>
                             <SongSearch onSearch={handleSearch} />
                             <div className='container-music'>
                                 <div className="song-list">
-                                    {memoizedFilteredSongs}
+                                    {filteredSongs.map((song, index) => (
+                                        <div key={index} className="song-item">
+                                            <div className='songPlay' onClick={() => handleSongClick(song)}>
+                                                {song.name ? song.name.replace(".mp3", "") : 'Unknown Song'}
+                                            </div>
+                                            <button className='btn-add' onClick={() => addToPlaylist(song)}>
+                                                <img alt='add-music' className='addMusicImg' src='music-add.png' />
+                                            </button>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>

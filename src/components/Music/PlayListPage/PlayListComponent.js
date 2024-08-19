@@ -1,13 +1,13 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useQuery } from 'react-query';
-import { db } from '../../firebase';
-import { useAuth } from '../../context/AuthContext';
+import { db } from '../../../firebase';
+import { useAuth } from '../../../context/AuthContext';
 import Sidebar from '../sidebar';
 import './PlayList.css';
 import SongSearch from '../MusicSearcher';
 import MediaPlayer from '../MediaPlayer';
-import { useMediaPlayer } from '../../context/MediaPlayerContext';
+import { useMediaPlayer } from '../../../context/MediaPlayerContext';
 import Loader from "../loader";
 
 const fetchPlaylist = async (uid) => {
