@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../../firebase';
 import './GenreSongs.css'; 
-import MediaPlayer from '../MediaPlayer';
-import Loader from "../loader";
+import MediaPlayer from '../../SubComponents/MediaPlayer/MediaPlayer';
+import Loader from "../../SubComponents/LoaderAnimation/loader";
 
 const GenreSongs = () => {
   const { genreName } = useParams();

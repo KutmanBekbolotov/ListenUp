@@ -1,27 +1,27 @@
 import React from 'react';
 import { useQuery } from 'react-query';
-import Sidebar from '../sidebar';
+import Sidebar from '../../SubComponents/Sidebar/sidebar';
 import GenreCover from './GenreCover';
 import './GlobalSearch.css';
-import rockImage from '../../assets/rock.jpg'; 
-import popImage from '../../assets/pop.jpg'; 
-import electronicImage from '../../assets/electronic.jpg';
-import hiphopImage from '../../assets/hiphop.jpg';
-import countryImage from '../../assets/country.jpg';
-import partyImage from '../../assets/party.jpeg';
-import kpopImage from '../../assets/kpop.jpeg';
-import sleepImage from '../../assets/sleep.jpg';
-import loveImage from '../../assets/love.jpg';
-import jazzImage from '../../assets/jazz.png';
-import classicalImage from '../../assets/classical.jpeg';
-import kidsImage from '../../assets/kids.jpg';
-import travelImage from '../../assets/travel.jpg';
-import gamingImage from '../../assets/gaming.jpg';
-import animeImage from '../../assets/anime.jpg';
-import soulImage from '../../assets/soul.jpeg';
-import topchartImage from '../../assets/topchart.jpg';
-import workoutImage from '../../assets/workout.jpg';
-import rapImage from '../../assets/rap.jpg';
+import rockImage from '../../../assets/GenreCovers/rock.jpg'; 
+import popImage from '../../../assets/GenreCovers/pop.jpg'; 
+import electronicImage from '../../../assets/GenreCovers/electronic.jpg';
+import hiphopImage from '../../../assets/GenreCovers/hiphop.jpg';
+import countryImage from '../../../assets/GenreCovers/country.jpg';
+import partyImage from '../../../assets/GenreCovers/party.jpeg';
+import kpopImage from '../../../assets/GenreCovers/kpop.jpeg';
+import sleepImage from '../../../assets/GenreCovers/sleep.jpg';
+import loveImage from '../../../assets/GenreCovers/love.jpg';
+import jazzImage from '../../../assets/GenreCovers/jazz.png';
+import classicalImage from '../../../assets/GenreCovers/classical.jpeg';
+import kidsImage from '../../../assets/GenreCovers/kids.jpg';
+import travelImage from '../../../assets/GenreCovers/travel.jpg';
+import gamingImage from '../../../assets/GenreCovers/gaming.jpg';
+import animeImage from '../../../assets/GenreCovers/anime.jpg';
+import soulImage from '../../../assets/GenreCovers/soul.jpeg';
+import topchartImage from '../../../assets/GenreCovers/topchart.jpg';
+import workoutImage from '../../../assets/GenreCovers/workout.jpg';
+import rapImage from '../../../assets/GenreCovers/rap.jpg';
 
 const GlobalSearchComponent = () => {
   const genresQuery = useQuery('genres', () => [

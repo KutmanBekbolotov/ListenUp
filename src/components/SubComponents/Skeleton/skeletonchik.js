@@ -1,6 +1,6 @@
 import React from 'react';
 import Skeleton from '@mui/material/Skeleton';
-import './AppModule.css'
+import '../../AppModule.css';
 import SongSearch from "../Searcher/MusicSearcher";
 
 const Skeletonchik = () => {
