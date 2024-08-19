@@ -3,12 +3,12 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useQuery } from 'react-query';
 import { db } from '../../../firebase';
 import { useAuth } from '../../../context/AuthContext';
-import Sidebar from '../sidebar';
+import Sidebar from '../../SubComponents/Sidebar/sidebar';
 import './PlayList.css';
-import SongSearch from '../MusicSearcher';
-import MediaPlayer from '../MediaPlayer';
+import SongSearch from '../../SubComponents/Searcher/MusicSearcher';
+import MediaPlayer from '../../SubComponents/MediaPlayer/MediaPlayer';
 import { useMediaPlayer } from '../../../context/MediaPlayerContext';
-import Loader from "../loader";
+import Loader from "../../SubComponents/LoaderAnimation/loader";
 
 const fetchPlaylist = async (uid) => {
     const playlistRef = doc(db, 'playlists', uid);
