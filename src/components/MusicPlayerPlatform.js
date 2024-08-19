@@ -6,7 +6,7 @@ import Sidebar from './sidebar';
 import SongSearch from './MusicSearcher';
 import { storage, db } from '../firebase';
 import { useAuth } from '../context/AuthContext';
-import {setLogger, useQuery} from 'react-query';
+import { useQuery } from 'react-query';
 import MediaPlayer from './MediaPlayer';
 import Modal from './Modal';
 import Loader from "./loader";
