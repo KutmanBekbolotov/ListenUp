@@ -11,6 +11,7 @@ import GenreSongs from './components/Music/GenrePage/GenreSongs';
 import UpdateMetadata from './components/admin/UpdateMetadata'; 
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { MediaPlayerProvider } from './context/MediaPlayerContext';
+import HomePageTwo from "./components/newPage/HomepageTwo"
 
 const PrivateRoute = ({ children }) => {
   const { currentUser } = useAuth();
@@ -33,6 +34,7 @@ function App() {
               <Route path="/genre/:genreName" element={<PrivateRoute><GenreSongs /></PrivateRoute>} />
               <Route path="/update-metadata" element={<PrivateRoute><UpdateMetadata /></PrivateRoute>} />
               <Route path="*" element={<Navigate to="/global-search" />} />
+              <Route path='/homepagetwo' element={<PrivateRoute><HomePageTwo/></PrivateRoute>}></Route>
             </Routes>
             <MediaPlayer />
           </div>
