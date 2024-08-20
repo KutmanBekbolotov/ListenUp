@@ -9,10 +9,10 @@
     border-radius: 50%;
     position: absolute;
     inset: 0;
-    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3) inset;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.5) inset;
   }
   .loader:after {
-    box-shadow: 0 2px 0 #FF3D00 inset;
+    box-shadow: 0 2px 0 #1dd9f1 inset;
     animation: rotate 2s linear infinite;
   }
   

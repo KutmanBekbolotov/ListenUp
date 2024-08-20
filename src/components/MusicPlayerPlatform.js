@@ -113,8 +113,8 @@ const MusicPlayerPlatform = () => {
         <div className="homepage">
             <Sidebar />
             <header className='redheader'>
-                <h2>Welcome to Listen Up music platform from <br /> Bulgass Soft Works</h2>
-                <h2>Here you can listen and add any music you want</h2>
+                <h2>Just Listen up</h2>
+                <pre>Version beta 0.0.1</pre>
             </header>
 
             <section className='section-platform'>

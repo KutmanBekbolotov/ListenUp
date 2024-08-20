@@ -10,7 +10,8 @@
   text-align: center;
   background: linear-gradient(to right, #7b4397, #dc2430);
   color: white;
-    margin-top: 55px;
+  margin-top: 55px;
+  border-radius: 15px;
 }
 
 .section-platform {
