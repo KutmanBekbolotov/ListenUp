@@ -12,6 +12,7 @@ import UpdateMetadata from './components/admin/UpdateMetadata';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { MediaPlayerProvider } from './context/MediaPlayerContext';
 import HomePageTwo from "./components/newPage/HomepageTwo"
+import "./App.css"
 
 const PrivateRoute = ({ children }) => {
   const { currentUser } = useAuth();
