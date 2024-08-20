@@ -51,7 +51,6 @@
 }
 
 @media screen and (max-width: 768px) {
-
   .media-button {
     width: 10%; /* Пример ширины кнопок */
     height: 5%; /* Пример высоты кнопок */

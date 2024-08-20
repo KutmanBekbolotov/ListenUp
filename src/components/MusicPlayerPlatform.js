@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ref as storageRef, listAll, getDownloadURL } from 'firebase/storage';
 import { doc, setDoc, getDoc, updateDoc, arrayUnion, Timestamp } from 'firebase/firestore';
 import './AppModule.css'; 
@@ -9,7 +9,6 @@ import MediaPlayer from './SubComponents/MediaPlayer/MediaPlayer';
 import Modal from './SubComponents/ModalWindows/Modal';
 import Loader from "./SubComponents/LoaderAnimation/loader";
 import Skeletonchik from "./SubComponents/Skeleton/skeletonchik"; 
-import 'react-loading-skeleton/dist/skeleton.css';
 import { useAuth } from '../context/AuthContext'; 
 
 const fetchSongs = async () => {
