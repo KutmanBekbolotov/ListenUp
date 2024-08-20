@@ -53,16 +53,15 @@
 @media screen and (max-width: 768px) {
 
   .media-button {
-    width: 10%; /* Пример ширины кнопок */
-    height: 5%; /* Пример высоты кнопок */
+    width: 10%; 
+    height: 5%; 
   }
 }
 
-/* Стили для еще меньших устройств */
 @media screen and (max-width: 480px) {
   .media-button {
-    width: 15%; /* Пример ширины кнопок */
-    height: 10%; /* Пример высоты кнопок */
+    width: 15%; 
+    height: 10%; 
   }
 
 .button-icons {

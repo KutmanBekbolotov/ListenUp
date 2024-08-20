@@ -9,7 +9,6 @@ export const useAuth = () => {
     return useContext(AuthContext);
 };
 
-// Функция для создания или обновления пользователя в Firestore
 const createOrUpdateUser = async (user) => {
     try {
         const userDocRef = doc(db, 'users', user.uid);
@@ -39,7 +38,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async user => {
             if (user) {
-                await createOrUpdateUser(user); // Добавляем или обновляем пользователя в Firestore
+                await createOrUpdateUser(user); 
             }
             setCurrentUser(user);
             setLoading(false);
